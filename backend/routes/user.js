@@ -19,6 +19,7 @@ router.post('/',(req,res) => {
         password: req.body.password,
         type: req.body.type
     });
+    console.log(newUser);
     newUser.save().then(user => res.json())
 })
 
