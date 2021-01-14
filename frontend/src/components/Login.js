@@ -43,23 +43,29 @@ export default class CreateUser extends Component {
         axios.post('http://localhost:5000/user/login', newUser)
              .then(res => 
             {
+                if (res.data.length === 0)
+                    alert('User Not Found')
+                else {
+                    alert("Login Successfull");
+                    console.log(res.data[0].type)
+                    if (res.data[0].type === "A") {
+                        console.log(this.state);
+                        this.props.history.push({
+                            pathname: '/applicant/:name',
+                            name: res.data[0].name
+                        })
+                    }
+                    else {
+                        this.props.history.push({
+                            pathname: '/recruiter/:name',
+                            name: res.data[0].name
+                        })
+                    }
+                }
                 //console.log(res.data.name);
-                let lol = newUser.type;
-                console.log(newUser);
-                if(lol == 'A'){
-                    console.log(10);
-                }
-                if(lol == 'R'){
-                    console.log(20);
-                }
-                let noice = "Here you go, "+ newUser.name +"!";
-                alert(noice);
-                console.log(res.data)
+                
             })
-             .catch(err => {
-                if(err.response.data.name)
-                    alert(err.response.data.name);
-                console.log(err)});
+           
 
         this.setState({
             name: '',
