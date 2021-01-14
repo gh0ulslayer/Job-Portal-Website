@@ -17,7 +17,7 @@ const User = new Schema({
     },
     type: {
         type: String,
-        enum: ['A','V'],
+        enum: ['A','R'],
         required: true
     },
     date: {
@@ -26,5 +26,6 @@ const User = new Schema({
         required: false
     }
 });
+
 
 module.exports =  mongoose.model('user' , User);

@@ -1,5 +1,4 @@
 const express = require('express');
-const user = require('../models/user');
 const router = express.Router();
 
 // User model
@@ -11,7 +10,7 @@ router.get('/',(req,res) => {
     .then(user => res.json(user));
 })
 
-// @route Post request
+// @route Post request for register
 router.post('/',(req,res) => {
     const newUser = new User({
         name: req.body.name,
@@ -19,9 +18,18 @@ router.post('/',(req,res) => {
         password: req.body.password,
         type: req.body.type
     });
-    console.log(newUser);
+    //console.log(newUser);
     newUser.save().then(user => res.json())
 })
+
+// @route Post request for login
+router.post('/login',(req,res) => {
+    let user1 = req.body;
+    User.find({ name: `${user1.name}`, password: `${user1.password}` }, function (err, user1) {
+        return res.json(user1);
+    });
+})
+
 
 
 module.exports  = router;

@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 import AppNavbar from './components/Appnavbar';
+import ApplicantNavbar from './components/ApplicantNavbar';
+
 import JobList from './components/Joblist';
 import Register from './components/Register';
 import Login from './components/Login';
@@ -13,6 +15,7 @@ import Login from './components/Login';
 function App() {
   return (
     <div className="App">
+      
       <AppNavbar />
       <Router>
        <Route path="/register" component={Register}/>
