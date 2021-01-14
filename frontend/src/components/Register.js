@@ -47,7 +47,7 @@ export default class CreateUser extends Component {
         axios.post('http://localhost:5000/user', newUser)
              .then(res => 
             {
-                let noice = "Happy to have you on board, "+ res.data.username +"!";
+                let noice = "Happy to have you on board, "+ newUser.name +"!";
                 alert(noice);
                 console.log(res.data)
             })
