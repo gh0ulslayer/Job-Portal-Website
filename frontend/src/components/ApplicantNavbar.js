@@ -31,7 +31,8 @@ class ApplicantNavbar extends Component {
                 <Collapse isOpen ={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                            <NavLink href = "./Login">Logout</NavLink>
+                        <NavLink onClick={() => {localStorage.clear();
+                            window.location.href = "/"; }} >Logout</NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>

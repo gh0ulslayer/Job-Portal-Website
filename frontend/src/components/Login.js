@@ -47,25 +47,25 @@ export default class CreateUser extends Component {
                     alert('User Not Found')
                 else {
                     alert("Login Successfull");
-                    console.log(res.data[0].type)
-                    if (res.data[0].type === "A") {
+                   // console.log(res.data[0].type)
+                   localStorage.setItem( 'type' , res.data[0].type ); 
+                   if (res.data[0].type === "A") {
                         console.log(this.state);
                         this.props.history.push({
-                            pathname: '/applicant/:name',
+                            pathname: '/applicant',
                             name: res.data[0].name
                         })
                     }
                     else {
                         this.props.history.push({
-                            pathname: '/recruiter/:name',
+                            pathname: '/recruiter',
                             name: res.data[0].name
                         })
                     }
                 }
-                //console.log(res.data.name);
-                
+                //console.log(res.data[0].name);
+                window.location.reload();
             })
-           
 
         this.setState({
             name: '',

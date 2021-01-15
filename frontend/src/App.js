@@ -12,19 +12,32 @@ import Register from './components/Register';
 import Login from './components/Login';
 
 
-function App() {
-  return (
-    <div className="App">
-      
-      <AppNavbar />
-      <Router>
-       <Route path="/register" component={Register}/>
-       <Route path="/login" component={Login}/>
+class App extends React.Component {
+  render() {
+    let type = localStorage.getItem('type');  
 
-      </Router>
+    let navbar = null;
     
-    </div>
-  );
+    if(type === 'A')
+      navbar = <ApplicantNavbar />;
+    else if(type === 'R')
+      navbar = <ApplicantNavbar />;
+    else
+      navbar = <AppNavbar />;
+
+      return (
+        <div className="App">
+          
+          {navbar}
+          <Router>
+           <Route path="/register" component={Register}/>
+           <Route path="/login" component={Login}/>
+    
+          </Router>
+        
+        </div>
+      );
+  }
 }
 
 export default App;
