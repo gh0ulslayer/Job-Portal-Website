@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import AppNavbar from './components/Appnavbar';
 import ApplicantNavbar from './components/ApplicantNavbar';
+import RecruiterNavbar from './components/RecruiterNavbar';
 
 import JobList from './components/Joblist';
 import Register from './components/Register';
@@ -21,7 +22,7 @@ class App extends React.Component {
     if(type === 'A')
       navbar = <ApplicantNavbar />;
     else if(type === 'R')
-      navbar = <ApplicantNavbar />;
+      navbar = <RecruiterNavbar />;
     else
       navbar = <AppNavbar />;
 

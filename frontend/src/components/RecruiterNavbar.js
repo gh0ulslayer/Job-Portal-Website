@@ -10,7 +10,7 @@ import {
     NavLink
 } from 'reactstrap';
 
-class ApplicantNavbar extends Component {
+class RecruiterNavbar extends Component {
   state = {
       isOpen: false
   }
@@ -26,15 +26,21 @@ class ApplicantNavbar extends Component {
         <div>
         <Navbar color = "dark" dark expand= "sm" className = "mb-5">
             <Container> 
-                <NavbarBrand href ="/">Applicant</NavbarBrand>
+                <NavbarBrand href ="/">Recruiter</NavbarBrand>
                 <NavbarToggler onClick ={this.toggle} /> 
                 <Collapse isOpen ={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
-                        <NavItem>
+                    <NavItem>
                         <NavLink href = "/" >My Applications</NavLink>
                         </NavItem>
                         <NavItem>
+                        <NavLink href = "/">Create Job</NavLink>
+                        </NavItem>
+                        <NavItem>
                         <NavLink href = "/">All Jobs</NavLink>
+                        </NavItem>
+                        <NavItem>
+                        <NavLink href = "/">Job Requests</NavLink>
                         </NavItem>
                         <NavItem>
                         <NavLink href = "/" >My Profile</NavLink>
@@ -53,4 +59,4 @@ class ApplicantNavbar extends Component {
 
 }
 
-export default ApplicantNavbar;
+export default RecruiterNavbar;
