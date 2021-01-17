@@ -18,6 +18,12 @@ router.post('/',(req,res) => {
         password: req.body.password,
         type: req.body.type
     });
+    // const existing = User.find({ email : `${newUser.email}`});
+    // if(existing)
+    // return res
+    //     .status(400)
+    //     .json({msg: "An account with this mail already exists"});
+    
     //console.log(newUser);
     newUser.save().then(user => res.json())
 })
@@ -29,7 +35,6 @@ router.post('/login',(req,res) => {
         return res.json(user1);
     });
 })
-
 
 
 module.exports  = router;

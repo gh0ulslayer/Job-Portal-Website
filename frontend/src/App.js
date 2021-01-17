@@ -7,8 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import AppNavbar from './components/Appnavbar';
 import ApplicantNavbar from './components/ApplicantNavbar';
 import RecruiterNavbar from './components/RecruiterNavbar';
+import RecAddjob from './components/Rec-addjob';
 
-import JobList from './components/Joblist';
 import Register from './components/Register';
 import Login from './components/Login';
 
@@ -33,6 +33,8 @@ class App extends React.Component {
           <Router>
            <Route path="/register" component={Register}/>
            <Route path="/login" component={Login}/>
+           <Route path="/Rec-addjob" component={RecAddjob}/>
+          
     
           </Router>
         

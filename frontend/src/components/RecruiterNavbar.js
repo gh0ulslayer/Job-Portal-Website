@@ -22,28 +22,26 @@ class RecruiterNavbar extends Component {
   }
 
   render() {
+      const curr = localStorage.getItem('name');
       return (
         <div>
         <Navbar color = "dark" dark expand= "sm" className = "mb-5">
             <Container> 
-                <NavbarBrand href ="/">Recruiter</NavbarBrand>
+                 <NavbarBrand href ="/"> Hi {curr} </NavbarBrand>
                 <NavbarToggler onClick ={this.toggle} /> 
                 <Collapse isOpen ={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
-                    <NavItem>
-                        <NavLink href = "/" >My Applications</NavLink>
+                        <NavItem>
+                        <NavLink href = "/Rec-addjob">Add Job</NavLink>
                         </NavItem>
                         <NavItem>
-                        <NavLink href = "/">Create Job</NavLink>
+                        <NavLink href = "/Rec-myjob">My Jobs</NavLink>
                         </NavItem>
                         <NavItem>
-                        <NavLink href = "/">All Jobs</NavLink>
+                        <NavLink href = "/Rec-jobreq">Job Requests</NavLink>
                         </NavItem>
                         <NavItem>
-                        <NavLink href = "/">Job Requests</NavLink>
-                        </NavItem>
-                        <NavItem>
-                        <NavLink href = "/" >My Profile</NavLink>
+                        <NavLink href = "/Rec-profile" >My Profile</NavLink>
                         </NavItem>
                         <NavItem>
                         <NavLink onClick={() => {localStorage.clear();

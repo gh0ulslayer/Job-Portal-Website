@@ -7,6 +7,8 @@ const DB_NAME =  "basic";
 const PORT = 5000;
 
 const user = require('./routes/user');
+const job = require('./routes/job');
+
 
 //Middleware
 app.use(bodyParser.json());
@@ -23,6 +25,9 @@ connection.once('open', function() {
 
 // APIs
 app.use('/user' ,user);
+app.use('/job' ,job);
+
+
 
 app.get('/', function(req, res){
     res.send('Working completely fine till here...');

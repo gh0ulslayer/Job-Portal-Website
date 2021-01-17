@@ -22,22 +22,24 @@ class ApplicantNavbar extends Component {
   }
 
   render() {
+    const curr = localStorage.getItem('name');
+
       return (
         <div>
         <Navbar color = "dark" dark expand= "sm" className = "mb-5">
             <Container> 
-                <NavbarBrand href ="/">Applicant</NavbarBrand>
+                <NavbarBrand href ="/">Hi {curr}</NavbarBrand>
                 <NavbarToggler onClick ={this.toggle} /> 
                 <Collapse isOpen ={this.state.isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
-                        <NavLink href = "/" >My Applications</NavLink>
+                        <NavLink href = "/App-appplication" >My Applications</NavLink>
                         </NavItem>
                         <NavItem>
-                        <NavLink href = "/">All Jobs</NavLink>
+                        <NavLink href = "/App-jobs">All Jobs</NavLink>
                         </NavItem>
                         <NavItem>
-                        <NavLink href = "/" >My Profile</NavLink>
+                        <NavLink href = "/App-profile" >My Profile</NavLink>
                         </NavItem>
                         <NavItem>
                         <NavLink onClick={() => {localStorage.clear();
