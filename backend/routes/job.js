@@ -23,8 +23,10 @@ router.post('/',(req,res) => {
         rec: req.body.rec
     });
     console.log(newJob);
+    
     newJob.save().then(job => res.json())
 })
+
 
 
 module.exports  = router;

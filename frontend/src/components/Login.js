@@ -52,7 +52,7 @@ export default class CreateUser extends Component {
                    localStorage.setItem( 'name' , res.data[0].name ); 
                    localStorage.setItem( 'userid' , res.data[0]._id );
                    
-                   localStorage.setItem( 'fuckboi cash era' , JSON.stringify(res.data[0]));
+                   localStorage.setItem( 'info' , JSON.stringify(res.data[0]));
 
                    if (res.data[0].type === "A") {
                         console.log(this.state);
