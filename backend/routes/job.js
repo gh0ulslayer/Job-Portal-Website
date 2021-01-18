@@ -18,7 +18,6 @@ router.post('/',(req,res) => {
         title: req.body.title,
         salary: req.body.salary,
         maxpos: req.body.maxpos,
-        maxapp: req.body.maxapp,
         type: req.body.type,
         rec: req.body.rec
     });

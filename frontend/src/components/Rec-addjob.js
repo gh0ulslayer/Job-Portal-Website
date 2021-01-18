@@ -9,14 +9,12 @@ export default class CreateUser extends Component {
             title: '',
             salary:'',
             maxpos:'',
-            maxapp:'',
             type: "F"
         }
         this.onChangetitle = this.onChangetitle.bind(this);
         this.onChangesalary = this.onChangesalary.bind(this);
         this.onChangeType = this.onChangeType.bind(this);
         this.onChangemaxpos = this.onChangemaxpos.bind(this);
-        this.onChangemaxapp = this.onChangemaxapp.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
     
@@ -43,9 +41,6 @@ export default class CreateUser extends Component {
         this.setState({  maxpos: event.target.value });
     }
 
-    onChangemaxapp(event) {
-        this.setState({  maxapp: event.target.value });
-    }
     onSubmit(e) {
         e.preventDefault();
 
@@ -55,7 +50,6 @@ export default class CreateUser extends Component {
             type: this.state.type,
             salary: this.state.salary,
             maxpos: this.state.maxpos,
-            maxapp: this.state.maxapp,
             rec: curr
         }
         console.log(newJob);
@@ -76,7 +70,6 @@ export default class CreateUser extends Component {
             name: '',
             salary : '',
             maxpos : '',
-            maxapp : '',
             type: 'F'
         });
     }
@@ -103,14 +96,7 @@ export default class CreateUser extends Component {
                                />
                     </div>
                 
-                    <div className="form-group">
-                        <label>Max Applicants: </label>
-                        <input type="text" 
-                               className="form-control" 
-                               value={this.state.maxapp}
-                               onChange={this.onChangemaxapp}
-                               />  
-                    </div>     
+                    
                    
                     <div className="form-group">
                         <label>Max Positions: </label>

@@ -9,6 +9,8 @@ import ApplicantNavbar from './components/ApplicantNavbar';
 import RecruiterNavbar from './components/RecruiterNavbar';
 import RecAddjob from './components/Rec-addjob';
 import RecMyjob from './components/Rec-myjob';
+import RecReqjob from './components/Rec-jobreq';
+import RecProfile from './components/Rec-profile';
 
 import Register from './components/Register';
 import Login from './components/Login';
@@ -36,6 +38,8 @@ class App extends React.Component {
            <Route path="/login" component={Login}/>
            <Route path="/Rec-addjob" component={RecAddjob}/>
            <Route path="/Rec-myjob" component={RecMyjob}/>
+           <Route path="/Rec-jobreq" component={RecReqjob}/>
+           <Route path="/Rec-profile" component={RecProfile}/>
           
     
           </Router>

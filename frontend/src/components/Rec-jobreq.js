@@ -21,7 +21,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
-class RecMyjob extends Component {
+class RecReqjob extends Component {
     
     constructor(props) {
         super(props);
@@ -84,4 +84,4 @@ class RecMyjob extends Component {
             }
 }
 
-export default RecMyjob;
+export default RecReqjob;
