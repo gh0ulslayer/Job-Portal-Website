@@ -28,8 +28,10 @@ class Appjob extends Component {
         this.state = {
             jobs: []
         };
+        this.sortbytitle = this.sortbytitle.bind(this);
+        this.sortbysalary = this.sortbysalary.bind(this);
     }
-
+   
     async componentWillMount(){
         let curr = localStorage.getItem('userid');
 
@@ -40,21 +42,39 @@ class Appjob extends Component {
              .catch(function(error) {
                  console.log(error);
              });
- 
+        
+        
         this.setState({
                 jobs: arr
         });
-
+        
     }
-
+    sortbytitle = () => {
+        let thiss  = this.state.jobs;
+        thiss.sort((a,b) => (a.title > b.title) ? 1 : -1);
+        this.setState({
+            jobs: thiss
+    });
+    }
+    sortbysalary = () => {
+        let thiss  = this.state.jobs;
+        thiss.sort((a,b) => (a.salary > b.salary) ? 1 : -1);
+        this.setState({
+            jobs: thiss
+    });
+    }
             render() {
+                
                 return (
                     <div>
+                        <Button variant="danger" onClick={this.sortbytitle} >Sort By Title</Button>
+                        <Button variant="danger" onClick={this.sortbysalary} >Sort By Salary</Button>
                         <table className="table table-striped">
                             <thead>
                                 <tr>
                                     <th>Job</th>
                                     <th>Positions remaining</th>
+                                    <th>Salary per month</th>
 
                                     <th></th>
                                 </tr>
@@ -66,7 +86,7 @@ class Appjob extends Component {
                                         <tr key={i}>
                                             <td>{job.title}</td>
                                             <td>{job.maxpos}</td>
-                                            
+                                            <td>{job.salary}</td>
                                         </tr>
                                     )
                                 })
