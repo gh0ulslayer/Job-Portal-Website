@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Create Schema
-const Profrec = new Schema({
+const Profilerec = new Schema({
     name: {
         type: String,
         required: true
@@ -19,6 +19,10 @@ const Profrec = new Schema({
         type: String,
         required: true
     },
+    rec:{
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
         default: Date.now,
@@ -27,4 +31,4 @@ const Profrec = new Schema({
 });
 
 
-module.exports =  mongoose.model('user' , User);
+module.exports =  mongoose.model('profilerec' , Profilerec);

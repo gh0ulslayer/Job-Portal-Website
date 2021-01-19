@@ -1,86 +1,78 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-export default class CreateUser extends Component {
+import { Link } from 'react-router-dom';
+
+
+export default class RecruiterProfile extends Component {
     
     constructor(props) {
         super(props);
-
-        this.state = {
-            name: '',
-            password:'',
-            type: "A",
-            email: ''
-        }
-        this.onChangePassword = this.onChangePassword.bind(this);
-        this.onChangename = this.onChangename.bind(this);
-        this.onChangeType = this.onChangeType.bind(this);
-        this.onChangeemail = this.onChangeemail.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    }
-    
-    onChangename(event) {
-        this.setState({ name: event.target.value });
+        this.state = {profile: []};
+        
     }
 
-    onChangeType(event) {
-        this.setState({ type: event.target.value });
-    }
 
-    onChangePassword(event) {
-        this.setState({ password: event.target.value });
-    }
+    async componentWillMount(){
+        let curr = JSON.parse(localStorage.getItem('info'));
 
-    onChangeemail(event) {
-        this.setState({ email: event.target.value });
-    }
-
-    onSubmit(e) {
-        e.preventDefault();
-
-        const newUser = {
-            name: this.state.name,
-            type: this.state.type,
-            email: this.state.email,
-            password:  this.state.password
-        }
-        //console.log(newUser);
-        axios.post('http://localhost:5000/user', newUser)
-             .then(res => 
-            {
-                let noice = "Happy to have you on board, "+ newUser.name +"!";
-                alert(noice);
-                console.log(res.data)
+        let arr = await axios.get('http://localhost:5000/profilerec')
+             .then(response => {
+                return response.data;
             })
-             .catch(err => {
-                if(err.response.data.name)
-                    alert(err.response.data.name);
-                console.log(err)});
+             .catch(function(error) {
+                 console.log(error);
+             });
+             console.log(arr);
+        
+        
+             let neww = await arr.filter( items => items.rec === curr._id );
+             console.log(neww);
+        console.log(curr._id);
+        console.log(neww);
 
         this.setState({
-            name: ''
+                profile: neww
         });
+
     }
 
     render() {
-        
+        let user = localStorage.getItem('name');
         return (
             <div>
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label>Name: </label>
-                        <input type="text" 
-                               className="form-control" 
-                               value={this.state.name}
-                               onChange={this.onChangename}
-                               />
-                    </div>
-                    
-                   
-                   
-                    <div className="form-group">
-                        <input type="submit" value="Edit" className="btn btn-primary"/>
-                    </div>
-                </form>
+                <h2>{user}'s Profile:</h2>
+                <br></br>
+                <table className="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Contact Number</th>
+                            <th>Bio</th>
+                            <th></th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                    { 
+                        this.state.profile.map((Profilerec, i) => {
+                            
+                            return (
+                                <tr key={i}>
+                                    <td>{Profilerec.name}</td>
+                                    <td>{Profilerec.email} </td>
+                                    <td>{Profilerec.contact} </td>
+                                    <td>{Profilerec.bio} </td>
+                                    <th>
+                                        <Link to={{ pathname: './recprofileedit', state: { 'id': Profilerec._id, 'name':Profilerec.name,'email':Profilerec.email,'contact':Profilerec.contact,'bio':Profilerec.bio} }}>Edit</Link></th>
+                                   
+                                </tr>
+                            )
+
+                        })
+                    }
+                    </tbody>
+                </table>
             </div>
         )
     }

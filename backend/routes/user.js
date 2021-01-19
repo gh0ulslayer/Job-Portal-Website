@@ -3,6 +3,7 @@ const router = express.Router();
 
 // User model
 const User = require('../models/user');
+const Profilerec = require('../models/profilerec');
 
 // @route Get request
 router.get('/',(req,res) => {
@@ -18,6 +19,7 @@ router.post('/',(req,res) => {
         password: req.body.password,
         type: req.body.type
     });
+
     // const existing = User.find({ email : `${newUser.email}`});
     // if(existing)
     // return res
@@ -25,6 +27,21 @@ router.post('/',(req,res) => {
     //     .json({msg: "An account with this mail already exists"});
     
     //console.log(newUser);
+    
+    if(newUser.type === "R")
+    {
+    const newProfileRec = new Profilerec;
+    newProfileRec.name = newUser.name;
+    newProfileRec.email = newUser.email;
+    newProfileRec.contact = "not set";
+    newProfileRec.bio = "not set";
+    newProfileRec.rec = newUser._id;
+    console.log(typeof newProfileRec.rec);
+    console.log(newProfileRec);
+    newProfileRec.save();
+   
+    }
+    
     newUser.save().then(user => res.json())
 })
 
