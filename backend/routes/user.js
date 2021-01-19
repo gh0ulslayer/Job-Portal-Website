@@ -48,6 +48,7 @@ router.post('/',(req,res) => {
 // @route Post request for login
 router.post('/login',(req,res) => {
     let user1 = req.body;
+    console.log(user1);
     User.find({ name: `${user1.name}`, password: `${user1.password}`, type: `${user1.type}` }, function (err, user1) {
         return res.json(user1);
     });

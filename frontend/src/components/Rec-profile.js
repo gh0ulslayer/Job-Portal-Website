@@ -26,9 +26,7 @@ export default class RecruiterProfile extends Component {
         
         
              let neww = await arr.filter( items => items.rec === curr._id );
-             console.log(neww);
         console.log(curr._id);
-        console.log(neww);
 
         this.setState({
                 profile: neww
@@ -63,9 +61,9 @@ export default class RecruiterProfile extends Component {
                                     <td>{Profilerec.email} </td>
                                     <td>{Profilerec.contact} </td>
                                     <td>{Profilerec.bio} </td>
+
                                     <th>
                                         <Link to={{ pathname: './recprofileedit', state: { 'id': Profilerec._id, 'name':Profilerec.name,'email':Profilerec.email,'contact':Profilerec.contact,'bio':Profilerec.bio} }}>Edit</Link></th>
-                                   
                                 </tr>
                             )
 
