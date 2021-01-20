@@ -19,7 +19,10 @@ router.post('/edit',(req,res) => {
 
     console.log(req.body.id);
     Profilerec.findOneAndUpdate({ _id: req.body.id } , { 
-        name: req.body.name
+        name: req.body.name,
+        email: req.body.email,
+        contact: req.body.contact,
+        bio: req.body.bio
      })
     .then(e => res.json(e))
     .catch(err => res.json(err));
