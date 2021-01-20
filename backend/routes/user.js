@@ -4,6 +4,7 @@ const router = express.Router();
 // User model
 const User = require('../models/user');
 const Profilerec = require('../models/profilerec');
+const Profileapp = require('../models/profileapp');
 
 // @route Get request
 router.get('/',(req,res) => {
@@ -40,6 +41,18 @@ router.post('/',(req,res) => {
     console.log(newProfileRec);
     newProfileRec.save();
    
+    }
+    else{
+        const newProfileApp = new Profileapp;
+        newProfileApp.name = newUser.name;
+        newProfileApp.email = newUser.email;
+        newProfileApp.contact = "not set";
+        newProfileApp.bio = "not set";
+        newProfileApp.rec = newUser._id;
+        console.log(typeof newProfileApp.rec);
+        console.log(newProfileApp);
+        newProfileApp.save();
+            
     }
     
     newUser.save().then(user => res.json())

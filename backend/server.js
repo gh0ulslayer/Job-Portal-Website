@@ -9,6 +9,7 @@ const PORT = 5000;
 const user = require('./routes/user');
 const job = require('./routes/job');
 const profilerec = require('./routes/profilerec');
+const profileapp = require('./routes/profileapp');
 
 
 //Middleware
@@ -28,6 +29,7 @@ connection.once('open', function() {
 app.use('/user' ,user);
 app.use('/job' ,job);
 app.use('/profilerec' ,profilerec);
+app.use('/profileapp' ,profileapp);
 
 
 
