@@ -20,6 +20,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import { Link } from 'react-router-dom';
 
 class RecMyjob extends Component {
     
@@ -58,7 +59,6 @@ class RecMyjob extends Component {
                                     <th>Job</th>
                                     <th>Positions remaining</th>
                                     <th>Total job requests</th>
-                                    <th>Date of Posting</th>
 
                                     <th></th>
                                 </tr>
@@ -71,9 +71,13 @@ class RecMyjob extends Component {
                                             <td>{job.title}</td>
                                             <td>{job.maxpos}</td>
                                             <td>{job.maxapp}</td>
-                                            <td>{job.date}</td>
-                                            
+                                            <th>
+                                        <Link to={{ pathname: './jobedit', state: { 'id': job._id, 'maxpos':job.maxpos, 'maxapp':job.maxapp} }}>Edit</Link></th>    
+                                       <th>
+                                        <Link to={{ pathname: './recprofileedit', state: { 'id': job._id, 'name':job.title} }}>Delete</Link></th>    
+                                           
                                         </tr>
+                                        
                                     )
                                 })
                             }

@@ -30,6 +30,7 @@ class Appjob extends Component {
         };
         this.sortbytitle = this.sortbytitle.bind(this);
         this.sortbysalary = this.sortbysalary.bind(this);
+        this.filterbysalary = this.filterbysalary.bind(this);
     }
    
     async componentWillMount(){
@@ -63,12 +64,20 @@ class Appjob extends Component {
             jobs: thiss
     });
     }
+    filterbysalary = (a,b) => {
+        let thiss  = this.state.jobs;
+        let neww =  thiss.filter( items => items.salary < 1000 & items.salary > 20)
+        this.setState({
+            jobs: neww
+    });
+    }
             render() {
                 
                 return (
                     <div>
                         <Button variant="danger" onClick={this.sortbytitle} >Sort By Title</Button>
                         <Button variant="danger" onClick={this.sortbysalary} >Sort By Salary</Button>
+                        <Button variant="danger" onClick={this.filterbysalary} >Filter By Salary</Button>
                         <table className="table table-striped">
                             <thead>
                                 <tr>

@@ -14,6 +14,7 @@ import RecProfile from './components/Rec-profile';
 import Appjob from './components/Appjob';
 import EditRec from './components/Profilerecedit';
 import EditApp from './components/Profileappedit';
+import EditJob from './components/Rec-jobedit';
 import AppProfile from './components/App-profile';
 
 import Register from './components/Register';
@@ -46,7 +47,8 @@ class App extends React.Component {
            <Route path="/Rec-profile" component={RecProfile}/>
            <Route path="/App-jobs" component={Appjob}/>
            <Route path="/recprofileedit" component={EditRec}/>
-           <Route path="/appprofileedit" component={EditApp}/>
+           <Route path="/recprofileedit" component={EditRec}/>
+           <Route path="/jobedit" component={EditJob}/>
            <Route path="/App-profile" component={AppProfile}/>
           
     

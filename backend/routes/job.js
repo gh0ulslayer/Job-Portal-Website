@@ -27,5 +27,15 @@ router.post('/',(req,res) => {
 })
 
 
+router.post('/edit',(req,res) => {
+
+    console.log(req.body.id);
+    Job.findOneAndUpdate({ _id: req.body.id } , { 
+        maxpos: req.body.maxpos,
+        maxapp: req.body.maxapp
+     })
+    .then(e => res.json(e))
+    .catch(err => res.json(err));
+});
 
 module.exports  = router;
