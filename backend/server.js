@@ -10,6 +10,7 @@ const user = require('./routes/user');
 const job = require('./routes/job');
 const profilerec = require('./routes/profilerec');
 const profileapp = require('./routes/profileapp');
+const apply = require('./routes/apply');
 
 
 //Middleware
@@ -30,6 +31,7 @@ app.use('/user' ,user);
 app.use('/job' ,job);
 app.use('/profilerec' ,profilerec);
 app.use('/profileapp' ,profileapp);
+app.use('/apply' ,apply);
 
 
 

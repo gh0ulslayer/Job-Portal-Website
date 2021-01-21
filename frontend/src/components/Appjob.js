@@ -20,6 +20,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import { Link } from 'react-router-dom';
 
 class Appjob extends Component {
     
@@ -72,7 +73,7 @@ class Appjob extends Component {
     });
     }
             render() {
-                
+                const curr = localStorage.getItem('userid');
                 return (
                     <div>
                         <Button variant="danger" onClick={this.sortbytitle} >Sort By Title</Button>
@@ -96,6 +97,11 @@ class Appjob extends Component {
                                             <td>{job.title}</td>
                                             <td>{job.maxpos}</td>
                                             <td>{job.salary}</td>
+
+                                            <th>
+                                              <Link to={{ pathname: './sop' ,state : {'jobid': job._id , 'app': curr , 'rec': job.rec }}}>Apply</Link></th>                               
+
+                                            
                                         </tr>
                                     )
                                 })
