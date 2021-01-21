@@ -17,6 +17,7 @@ import EditApp from './components/Profileappedit';
 import EditJob from './components/Rec-jobedit';
 import AppProfile from './components/App-profile';
 import Addsop from './components/Appsop';
+import Shortlist from './components/Shortlist';
 
 import Register from './components/Register';
 import Login from './components/Login';
@@ -52,6 +53,7 @@ class App extends React.Component {
            <Route path="/jobedit" component={EditJob}/>
            <Route path="/App-profile" component={AppProfile}/>
            <Route path="/sop" component={Addsop}/>
+           <Route path="/shortlist" component={Shortlist}/>
           
     
           </Router>

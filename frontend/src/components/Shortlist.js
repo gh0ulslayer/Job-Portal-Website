@@ -27,14 +27,14 @@ class RecMyjob extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            jobs: []
+            applications: []
         };
     }
 
     async componentWillMount(){
         let curr = localStorage.getItem('userid');
 
-        let arr = await axios.get('http://localhost:5000/job')
+        let arr = await axios.get('http://localhost:5000/apply')
              .then(response => {
                 return response.data;
             })
@@ -45,7 +45,7 @@ class RecMyjob extends Component {
         let neww = await arr.filter( items => items.rec === curr );
         console.log(neww);
         this.setState({
-                jobs: neww
+                applications: neww
         });
 
     }
@@ -56,26 +56,24 @@ class RecMyjob extends Component {
                         <table className="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Job</th>
-                                    <th>Positions remaining</th>
-                                    <th>Total job requests</th>
+                                    <th>Name</th>
+                                    <th>SOP</th>
 
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                             { 
-                                this.state.jobs.map((job, i) => {
+                                this.state.applications.map((job, i) => {
                                     return (
                                         <tr key={i}>
+                                            <td>{job.title}</td>
+                                            <td>{job.review}</td>
                                             <th>
-                                            <Link to={{ pathname: './shortlist', state: { 'id': job._id} }}>{job.title}</Link></th>
-                                            <td>{job.maxpos}</td>
-                                            <td>{job.maxapp}</td>
-                                            <th>
-                                        <Link to={{ pathname: './jobedit', state: { 'id': job._id, 'maxpos':job.maxpos, 'maxapp':job.maxapp} }}>Edit</Link></th>    
+                                        <Link to={{ pathname: './jobedit', state: { 'id': job._id, 'maxpos':job.maxpos, 'maxapp':job.maxapp} }}>Shortlist</Link></th>    
                                        <th>
-                                        <Link to={{ pathname: './recprofileedit', state: { 'id': job._id, 'name':job.title} }}>Delete</Link></th>    
+
+                                        <Link to={{ pathname: './recprofileedit', state: { 'id': job._id, 'name':job.title} }}>Reject</Link></th>    
                                            
                                         </tr>
                                         
