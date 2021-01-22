@@ -115,7 +115,7 @@ class Appjob extends Component {
         
     }
     
-
+    
     sortbysalary = () => {
         let thiss  = this.state.jobs;
         thiss.sort((a,b) => (a.salary > b.salary) ? 1 : -1);
@@ -226,10 +226,12 @@ class Appjob extends Component {
                         <table className="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Job</th>
-                                    <th>Positions remaining</th>
+                                    <th>Job Title</th>
+                                    <th>Recruiter</th>
+                                    <th>Job Rating</th>
                                     <th>Salary per month</th>
-
+                                    <th>Job Duration</th>
+                                    <th>Deadline</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -239,8 +241,11 @@ class Appjob extends Component {
                                     return (
                                         <tr key={i}>
                                             <td>{job.title}</td>
-                                            <td>{job.maxpos}</td>
+                                            <td> {job.recname} </td>
+                                            <td>{job.rating}</td>
                                             <td>{job.salary}</td>
+                                            <td>{job.duration}</td>
+                                            <td>{job.deadline}</td>
 
                                             <th>
                                               <Link to={{ pathname: './sop' ,state : {'jobid': job._id , 'app': curr , 'rec': job.rec }}}>Apply</Link></th>                               

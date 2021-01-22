@@ -16,6 +16,7 @@ import EditRec from './components/Profilerecedit';
 import EditApp from './components/Profileappedit';
 import EditJob from './components/Rec-jobedit';
 import AppProfile from './components/App-profile';
+import Appapplication from './components/App-application';
 import Addsop from './components/Appsop';
 import Shortlist from './components/Shortlist';
 
@@ -52,6 +53,7 @@ class App extends React.Component {
            <Route path="/recprofileedit" component={EditRec}/>
            <Route path="/jobedit" component={EditJob}/>
            <Route path="/App-profile" component={AppProfile}/>
+           <Route path="/App-application" component={Appapplication}/>
            <Route path="/sop" component={Addsop}/>
            <Route path="/shortlist" component={Shortlist}/>
           

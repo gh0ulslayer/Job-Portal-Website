@@ -24,5 +24,13 @@ router.post('/',(req,res) => {
     newApply.save().then(apply => res.json())
 })
 
+router.post('/app',(req,res) => {
+    let user1 = req.body;
+    console.log(user1);
+    Job.find({ app: `${user1}`}, function (err, user1) {
+        return res.json(user1);
+    });
+})
+
 
 module.exports  = router;
