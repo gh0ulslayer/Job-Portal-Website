@@ -45,6 +45,7 @@ export default class CreateUser extends Component {
         e.preventDefault();
 
         var curr = localStorage.getItem('userid');
+        
         const newJob = {
             title: this.state.title,
             type: this.state.type,
@@ -53,7 +54,6 @@ export default class CreateUser extends Component {
             rec: curr
         }
         console.log(newJob);
-        
         axios.post('http://localhost:5000/job', newJob)
              .then(res => 
             {

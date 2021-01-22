@@ -97,7 +97,7 @@ class Appjob extends Component {
     }
     async componentWillMount(){
         let curr = localStorage.getItem('userid');
-
+        
         let arr = await axios.get('http://localhost:5000/job')
              .then(response => {
                 return response.data;
@@ -112,7 +112,25 @@ class Appjob extends Component {
                 minsalary: this.state.minsalary,
                 maxsalary: this.state.maxsalary
         });
-        
+        const data = await Promise.all( arr.map(async function(job, i){
+            let alldata = {};
+            alldata = {...job};
+            
+            let arrr = await axios.post('http://localhost:5000/user/getname', { id: job.rec})
+            .then(response => {
+                return response.data;
+           });
+           console.log(arrr.name);
+           alldata.recname = arrr.name;
+            return alldata;
+         
+        }));
+        this.setState({
+            jobs: data,
+            minsalary: this.state.minsalary,
+            maxsalary: this.state.maxsalary
+    });
+    //    console.log(data);
     }
     
     
@@ -186,6 +204,7 @@ class Appjob extends Component {
    
             render() {
                 const curr = localStorage.getItem('userid');
+                console.log(this.state.jobs);
                 return (
                     <div>
                         <form onSubmit={this.onSubmit}>
@@ -237,23 +256,18 @@ class Appjob extends Component {
                             </thead>
                             <tbody>
                             { 
-                                this.state.jobs.map((job, i) => {
-                                    return (
-                                        <tr key={i}>
-                                            <td>{job.title}</td>
-                                            <td> {job.recname} </td>
-                                            <td>{job.rating}</td>
-                                            <td>{job.salary}</td>
-                                            <td>{job.duration}</td>
-                                            <td>{job.deadline}</td>
-
-                                            <th>
-                                              <Link to={{ pathname: './sop' ,state : {'jobid': job._id , 'app': curr , 'rec': job.rec }}}>Apply</Link></th>                               
-
-                                            
-                                        </tr>
-                                    )
-                                })
+                               this.state.jobs.map((job,i)=> {
+                                   return(
+                                <tr key={i}>
+                                <td>{job.title}</td>
+                                <td>{job.recname}</td>
+                                <td>{job.recname}</td>
+                                <td>{job.recname}</td>
+                                <td>{job.recname}</td>
+                                <td>{job.recname}</td>
+                                </tr>
+                                   )
+                               })
                             }
                             </tbody>
                         </table>

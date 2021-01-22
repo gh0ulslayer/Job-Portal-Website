@@ -25,6 +25,7 @@ const Job = new Schema({
         type: String,
         required: true
     },
+   
     type: {
         type: String,
         enum: ['F','P','W'],
