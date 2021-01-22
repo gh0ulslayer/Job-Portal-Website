@@ -29,8 +29,12 @@ class Appjob extends Component {
         this.state = {
             jobs: []
         };
-        this.sortbytitle = this.sortbytitle.bind(this);
         this.sortbysalary = this.sortbysalary.bind(this);
+        this.sortbyduration = this.sortbyduration.bind(this);
+        this.sortbyrating = this.sortbyrating.bind(this);
+        this.dsortbyrating = this.dsortbyrating.bind(this);
+        this.dsortbyduration = this.dsortbyduration.bind(this);
+        this.dsortbysalary = this.dsortbysalary.bind(this);
         this.filterbysalary = this.filterbysalary.bind(this);
     }
    
@@ -51,16 +55,47 @@ class Appjob extends Component {
         });
         
     }
-    sortbytitle = () => {
+    
+    sortbysalary = () => {
         let thiss  = this.state.jobs;
-        thiss.sort((a,b) => (a.title > b.title) ? 1 : -1);
+        thiss.sort((a,b) => (a.salary > b.salary) ? 1 : -1);
         this.setState({
             jobs: thiss
     });
     }
-    sortbysalary = () => {
+    
+    sortbyduration = () => {
         let thiss  = this.state.jobs;
-        thiss.sort((a,b) => (a.salary > b.salary) ? 1 : -1);
+        thiss.sort((a,b) => (a.duration > b.duration) ? 1 : -1);
+        this.setState({
+            jobs: thiss
+    });
+    }
+    
+    sortbyrating = () => {
+        let thiss  = this.state.jobs;
+        thiss.sort((a,b) => (a.rating > b.rating) ? 1 : -1);
+        this.setState({
+            jobs: thiss
+    });
+    }
+    dsortbyduration = () => {
+        let thiss  = this.state.jobs;
+        thiss.sort((a,b) => (a.duration < b.duration) ? 1 : -1);
+        this.setState({
+            jobs: thiss
+    });
+    }
+    dsortbyrating = () => {
+        let thiss  = this.state.jobs;
+        thiss.sort((a,b) => (a.rating < b.rating) ? 1 : -1);
+        this.setState({
+            jobs: thiss
+    });
+    }  
+    dsortbysalary = () => {
+        let thiss  = this.state.jobs;
+        thiss.sort((a,b) => (a.salary < b.salary) ? 1 : -1);
         this.setState({
             jobs: thiss
     });
@@ -76,9 +111,14 @@ class Appjob extends Component {
                 const curr = localStorage.getItem('userid');
                 return (
                     <div>
-                        <Button variant="danger" onClick={this.sortbytitle} >Sort By Title</Button>
-                        <Button variant="danger" onClick={this.sortbysalary} >Sort By Salary</Button>
-                        <Button variant="danger" onClick={this.filterbysalary} >Filter By Salary</Button>
+                        <Button  onClick={this.sortbysalary} >Sort By Salary</Button>
+                        <Button  onClick={this.dsortbysalary} >Sort By Salary(Descending)</Button>
+                        <Button  onClick={this.sortbyduration} >Sort By Duration</Button>
+                        <Button  onClick={this.dsortbyduration} >Sort By Duration(Descending)</Button>
+                        <Button  onClick={this.sortbyrating} >Sort By Rating</Button>
+                        <Button  onClick={this.dsortbyrating} >Sort By Rating(Descending)</Button>
+                        
+                    
                         <table className="table table-striped">
                             <thead>
                                 <tr>
