@@ -27,17 +27,74 @@ class Appjob extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            jobs: []
+            jobs: [],
+            search: '',
+            minsalary: '',
+            maxsalary: '',
+            durr: '7',
+            j_type: 'F'
+
         };
+        this.onChangesearch = this.onChangesearch.bind(this);
         this.sortbysalary = this.sortbysalary.bind(this);
         this.sortbyduration = this.sortbyduration.bind(this);
         this.sortbyrating = this.sortbyrating.bind(this);
         this.dsortbyrating = this.dsortbyrating.bind(this);
         this.dsortbyduration = this.dsortbyduration.bind(this);
         this.dsortbysalary = this.dsortbysalary.bind(this);
+        this.onChangeminsalary = this.onChangeminsalary.bind(this);
+        this.onChangemaxsalary = this.onChangemaxsalary.bind(this);
+        this.onChangedurr = this.onChangedurr.bind(this);
+        this.onChangej_type = this.onChangej_type.bind(this);
         this.filterbysalary = this.filterbysalary.bind(this);
+        this.filterbydurr = this.filterbydurr.bind(this);
+        this.filterbyj_type = this.filterbyj_type.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+
     }
-   
+    onChangesearch(event) {
+        this.setState({ search: event.target.value });
+    }
+    onChangemaxsalary(event) {
+        this.setState({ maxsalary: event.target.value });
+    }
+    onChangeminsalary(event) {
+        this.setState({ minsalary: event.target.value });
+    }
+    onChangemaxsalary(event) {
+        this.setState({ maxsalary: event.target.value });
+    }
+    onChangedurr(event) {
+        this.setState({ durr: event.target.value });
+    }
+    onChangej_type(event) {
+        this.setState({ j_type: event.target.value });
+    }
+
+    onSubmit(e) {
+        e.preventDefault();
+        const Search = {
+            title: this.state.search,
+        }
+
+        console.log(Search);
+        axios.post('http://localhost:5000/job/search', Search)
+             .then(res => {
+                console.log(res.data);
+                this.setState({jobs: res.data});
+
+            })
+             .catch(err =>
+                {
+                    if(err.response.data.message)
+                    alert(err.response.data.message);
+                    console.log(err)
+                });
+
+        this.setState({
+            search : '',
+        });
+    }
     async componentWillMount(){
         let curr = localStorage.getItem('userid');
 
@@ -51,11 +108,14 @@ class Appjob extends Component {
         
         
         this.setState({
-                jobs: arr
+                jobs: arr,
+                minsalary: this.state.minsalary,
+                maxsalary: this.state.maxsalary
         });
         
     }
     
+
     sortbysalary = () => {
         let thiss  = this.state.jobs;
         thiss.sort((a,b) => (a.salary > b.salary) ? 1 : -1);
@@ -100,24 +160,68 @@ class Appjob extends Component {
             jobs: thiss
     });
     }
-    filterbysalary = (a,b) => {
+    filterbysalary = () => {
         let thiss  = this.state.jobs;
-        let neww =  thiss.filter( items => items.salary < 1000 & items.salary > 20)
+        let neww =  thiss.filter( items => items.salary < this.state.maxsalary & items.salary > this.state.minsalary)
         this.setState({
-            jobs: neww
+            jobs: neww,
+            minsalary: '',
+            maxsalary: ''
     });
     }
+    filterbydurr = () => {
+        let thiss  = this.state.jobs;
+        let neww =  thiss.filter( items => items.duration === this.state.durr )
+        this.setState({
+            jobs: neww,
+    });
+    }
+    filterbyj_type = () => {
+        let thiss  = this.state.jobs;
+        let neww =  thiss.filter( items => items.type < this.state.j_type )
+        this.setState({
+            jobs: neww,
+    });
+    }
+   
             render() {
                 const curr = localStorage.getItem('userid');
                 return (
                     <div>
+                        <form onSubmit={this.onSubmit}>
+                        <div className="form-group">
+                        <label>Job Title: </label>
+                        <input type="text" 
+                               className="form-control" 
+                               value={this.state.search}
+                               onChange={this.onChangesearch}
+                               />  
+                         </div>
+
+                        <div className="form-group">
+                        <input type="submit" value="Search" className="btn btn-primary" size="2"/>
+                        </div>
+                         </form>
                         <Button  onClick={this.sortbysalary} >Sort By Salary</Button>
                         <Button  onClick={this.dsortbysalary} >Sort By Salary(Descending)</Button>
                         <Button  onClick={this.sortbyduration} >Sort By Duration</Button>
                         <Button  onClick={this.dsortbyduration} >Sort By Duration(Descending)</Button>
                         <Button  onClick={this.sortbyrating} >Sort By Rating</Button>
                         <Button  onClick={this.dsortbyrating} >Sort By Rating(Descending)</Button>
+                        <br></br>
+                        <label>Min Salary: </label>
+                        <input type="number" 
+                               value={this.state.minsalary}
+                               onChange={this.onChangeminsalary}
+                               />  
                         
+                        <label> Max Salary: </label>
+                        <input type="number" 
+                               value={this.state.maxsalary}
+                               onChange={this.onChangemaxsalary}
+                               />  
+                        <Button  onClick={this.filterbysalary} >Filter by salary</Button>
+                    
                     
                         <table className="table table-striped">
                             <thead>

@@ -26,16 +26,12 @@ router.post('/',(req,res) => {
     newJob.save().then(job => res.json())
 })
 
-
-router.post('/edit',(req,res) => {
-
-    console.log(req.body.id);
-    Job.findOneAndUpdate({ _id: req.body.id } , { 
-        maxpos: req.body.maxpos,
-        maxapp: req.body.maxapp
-     })
-    .then(e => res.json(e))
-    .catch(err => res.json(err));
-});
+router.post('/search',(req,res) => {
+    let user1 = req.body;
+    console.log(user1);
+    Job.find({ title: `${user1.title}`}, function (err, user1) {
+        return res.json(user1);
+    });
+})
 
 module.exports  = router;
