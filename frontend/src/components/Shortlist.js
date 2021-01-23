@@ -27,7 +27,8 @@ class RecMyjob extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            applications: []
+            applications: [],
+            varr: false
         };
     }
 
@@ -53,6 +54,7 @@ class RecMyjob extends Component {
            });
            console.log(arrr.name);
            alldata.recname = arrr.name;
+           alldata.varr = 1;
             return alldata;
          
         }));
@@ -70,11 +72,16 @@ class RecMyjob extends Component {
             render() {
                 return (
                     <div>
+                       
                         <table className="table table-striped">
                             <thead>
                                 <tr>
                                     <th>Name</th>
                                     <th>SOP</th>
+                                    <th>Education</th>
+                                    <th>Rating</th>
+                                    <th>Stage</th>
+                                    <th>Date of Application</th>
 
                                     <th></th>
                                 </tr>
@@ -82,16 +89,18 @@ class RecMyjob extends Component {
                             <tbody>
                             { 
                                 this.state.applications.map((job, i) => {
+                                    let varr = false;
                                     return (
+                                        
                                         <tr key={i}>
                                             <td>{job.recname}</td>
                                             <td>{job.review}</td>
-                                            <th>
-                                        <Link to={{ pathname: './jobedit', state: { 'id': job._id, 'maxpos':job.maxpos, 'maxapp':job.maxapp} }}>Shortlist</Link></th>    
-                                       <th>
-
-                                        <Link to={{ pathname: './recprofileedit', state: { 'id': job._id, 'name':job.title} }}>Reject</Link></th>    
-                                           
+                                            <td>{job.education}</td>
+                                            <td>{job.rating}</td>
+                                            <td>{job.type}</td>
+                                            <td>{job.date}</td>
+                                            <td>
+                                            { job.varr ? <Button color="primary" >Applied</Button>: <Button variant="contained" onClick={()=> {} }>view</Button> }  </td>
                                         </tr>
                                         
                                     )

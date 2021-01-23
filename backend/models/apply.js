@@ -20,6 +20,11 @@ const Apply = new Schema({
         type: String,
         required: true
     },
+    type: {
+        type: String,
+        enum: ['Applied','Shortlisted' , 'Rejected' ,'Accepted'],
+        default: 'Applied'
+    },
     date: {
         type: Date,
         default: Date.now,

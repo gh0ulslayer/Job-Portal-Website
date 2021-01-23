@@ -56,7 +56,6 @@ class Appapplication extends Component {
             .then(response => {
                 return response.data;
            });
-           console.log(arrr.name);
            alldata.recname = arrr.name;
             return alldata;
          
@@ -70,10 +69,13 @@ class Appapplication extends Component {
         
         let arrrr = await axios.post('http://localhost:5000/job/app', { id: job.jobid})
         .then(response => {
-            console.log(response.data[0].title);
             return response.data;
        });
        alldataa.title = arrrr[0].title;
+       alldataa.rating = arrrr[0].rating;
+       alldataa.salary = arrrr[0].salary;
+       alldataa.duration = arrrr[0].duration;
+       alldataa.deadline = arrrr[0].deadline;
 
        return alldataa;
      
@@ -108,6 +110,11 @@ class Appapplication extends Component {
                                         <tr key={i}>
                                             <td>{application.title}</td>
                                             <td>{application.recname}</td>
+                                            <td>{application.rating}</td>
+                                            <td>{application.salary}</td>
+                                            <td>{application.duration}</td>
+                                            <td>{application.deadline}</td>
+                                            <td>{application.type}</td>
                                             
                                         </tr>
                                     )
