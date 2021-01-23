@@ -25,9 +25,9 @@ router.post('/',(req,res) => {
 })
 
 router.post('/app',(req,res) => {
-    let user1 = req.body;
-    console.log(user1);
-    Job.find({ app: `${user1}`}, function (err, user1) {
+
+    console.log(req.body);
+    Apply.find({ app: req.body.id }, function (err, user1) {
         return res.json(user1);
     });
 })

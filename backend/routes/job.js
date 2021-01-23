@@ -33,5 +33,12 @@ router.post('/search',(req,res) => {
         return res.json(user1);
     });
 })
+router.post('/app',(req,res) => {
+
+    console.log(req.body);
+    Job.find({ _id: req.body.id }, function (err, user1) {
+        return res.json(user1);
+    });
+})
 
 module.exports  = router;

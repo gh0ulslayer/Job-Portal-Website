@@ -32,11 +32,54 @@ class Appapplication extends Component {
         };
 
     }
-
-    componentWillMount(){
+    async componentWillMount(){
         let curr = localStorage.getItem('userid');
         
+        let arr = await axios.post('http://localhost:5000/apply/app',{id:curr})
+             .then(response => {
+                 console.log(response.data);
+                return response.data;
+            })
+             .catch(function(error) {
+                 console.log(error);
+             });
         
+        
+        this.setState({
+                applications: arr
+        });
+        const data = await Promise.all( arr.map(async function(job, i){
+            let alldata = {};
+            alldata = {...job};
+            
+            let arrr = await axios.post('http://localhost:5000/user/getname', { id: job.rec})
+            .then(response => {
+                return response.data;
+           });
+           console.log(arrr.name);
+           alldata.recname = arrr.name;
+            return alldata;
+         
+        }));
+        this.setState({
+            applications: data
+    });
+    const dataa = await Promise.all( data.map(async function(job, i){
+        let alldataa = {};
+        alldataa = {...job};
+        let arrrr = await axios.post('http://localhost:5000/user/getname', { id: job.jobid})
+        .then(response => {
+            return response.data;
+       });
+       console.log(arrrr.title);
+       alldataa.title = arrrr.title;
+        return alldataa;
+     
+    }));
+    this.setState({
+        applications: dataa
+});
+    //    console.log(data);
     }
     
             render() {
@@ -52,6 +95,7 @@ class Appapplication extends Component {
                                     <th>Salary per month</th>
                                     <th>Job Duration</th>
                                     <th>Deadline</th>
+                                    <th>Status</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -61,11 +105,7 @@ class Appapplication extends Component {
                                     return (
                                         <tr key={i}>
                                             <td>{application.title}</td>
-                                            <td>{application.rec}</td>
-                                            <td>{application.rating}</td>
-                                            <td>{application.salary}</td>
-                                            <td>{application.duration}</td>
-                                            <td>{application.deadline}</td>
+                                            <td>{application.recname}</td>
                                             
                                         </tr>
                                     )

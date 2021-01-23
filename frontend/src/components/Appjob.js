@@ -261,11 +261,14 @@ class Appjob extends Component {
                                 <tr key={i}>
                                 <td>{job.title}</td>
                                 <td>{job.recname}</td>
-                                <td>{job.recname}</td>
-                                <td>{job.recname}</td>
-                                <td>{job.recname}</td>
-                                <td>{job.recname}</td>
+                                <td>{job.rating}</td>
+                                <td>{job.salary}</td>
+                                <td>{job.duration}</td>
+                                <td>{job.deadline}</td>
+                                <th>
+                                        <Link to={{ pathname: './sop', state: { 'jobid': job._id , 'app': curr , 'rec': job.rec} }}>Apply</Link></th> 
                                 </tr>
+                                
                                    )
                                })
                             }

@@ -42,7 +42,24 @@ class RecMyjob extends Component {
                  console.log(error);
              });
 
-        let neww = await arr.filter( items => items.rec === curr );
+        
+        const data = await Promise.all( arr.map(async function(job, i){
+            let alldata = {};
+            alldata = {...job};
+            
+            let arrr = await axios.post('http://localhost:5000/user/getname', { id: job.app})
+            .then(response => {
+                return response.data;
+           });
+           console.log(arrr.name);
+           alldata.recname = arrr.name;
+            return alldata;
+         
+        }));
+        this.setState({
+            applications: data
+    });
+    let neww = await data.filter( items => items.rec === curr );
         console.log(neww);
         this.setState({
                 applications: neww
@@ -67,7 +84,7 @@ class RecMyjob extends Component {
                                 this.state.applications.map((job, i) => {
                                     return (
                                         <tr key={i}>
-                                            <td>{job.title}</td>
+                                            <td>{job.recname}</td>
                                             <td>{job.review}</td>
                                             <th>
                                         <Link to={{ pathname: './jobedit', state: { 'id': job._id, 'maxpos':job.maxpos, 'maxapp':job.maxapp} }}>Shortlist</Link></th>    
