@@ -69,7 +69,6 @@ router.post('/login',(req,res) => {
 
 router.post('/getname',(req,res) => {
 
-    console.log(req.body);
     User.findOne({ _id: req.body.id }, function (err, user1) {
         return res.json(user1);
     });

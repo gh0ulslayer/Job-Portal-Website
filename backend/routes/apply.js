@@ -19,14 +19,12 @@ router.post('/',(req,res) => {
         rec: req.body.rec,
         app: req.body.app,
     });
-    console.log(newApply);
     
     newApply.save().then(apply => res.json())
 })
 
 router.post('/app',(req,res) => {
 
-    console.log(req.body);
     Apply.find({ app: req.body.id }, function (err, user1) {
         return res.json(user1);
     });

@@ -67,13 +67,15 @@ class Appapplication extends Component {
     const dataa = await Promise.all( data.map(async function(job, i){
         let alldataa = {};
         alldataa = {...job};
-        let arrrr = await axios.post('http://localhost:5000/user/getname', { id: job.jobid})
+        
+        let arrrr = await axios.post('http://localhost:5000/job/app', { id: job.jobid})
         .then(response => {
+            console.log(response.data[0].title);
             return response.data;
        });
-       console.log(arrrr.title);
-       alldataa.title = arrrr.title;
-        return alldataa;
+       alldataa.title = arrrr[0].title;
+
+       return alldataa;
      
     }));
     this.setState({

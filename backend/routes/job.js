@@ -33,6 +33,7 @@ router.post('/search',(req,res) => {
         return res.json(user1);
     });
 })
+
 router.post('/app',(req,res) => {
 
     console.log(req.body);
