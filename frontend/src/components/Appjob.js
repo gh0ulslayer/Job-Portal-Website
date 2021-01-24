@@ -123,9 +123,20 @@ class Appjob extends Component {
            });
          //  console.log(arrr.name);
            alldata.recname = arrr.name;
-            return alldata;
-         
+           const idd = localStorage.getItem('userid');
+
+           axios.post('http://localhost:5000/profileapp/getrem',{id:idd})
+                .then(resss => {
+                  console.log(resss.data[0]);
+                   alldata.rem = resss.data[0].rem;
+               })
+                .catch(function(error) {
+                    console.log(error);
+                });
+           return alldata;
+        
         }));
+
         this.setState({
             jobs: data,
             minsalary: this.state.minsalary,
@@ -288,6 +299,7 @@ class Appjob extends Component {
                             { 
                                this.state.jobs.map((job,i)=> {
                                    return(
+                                    
                                 <tr key={i}>
                                 <td>{job.title}</td>
                                 <td>{job.recname}</td>
@@ -296,8 +308,8 @@ class Appjob extends Component {
                                 <td>{job.duration}</td>
                                 <td>{job.type}</td>
                                 <td>{job.deadline}</td>
-                                <th>
-                                        <Link to={{ pathname: './sop', state: { 'jobid': job._id , 'app': curr , 'rec': job.rec} }} onClick={() => this.subcount()}>Apply</Link></th> 
+                                <td>
+                                            { job.rem ?  <Button  style = {{color:'green'}}  color="primary" disabled>Full</Button>:<Link to={{ pathname: './sop', state: { 'jobid': job._id , 'app': curr , 'rec': job.rec} }} onClick={() => this.subcount()}> <Button style = {{backgroundColor:'red'}} variant="contained" onClick={()=>{}}>Apply</Button></Link> }</td>
                                 </tr>
                                 
                                    )
