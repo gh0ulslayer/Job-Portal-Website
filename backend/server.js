@@ -12,7 +12,6 @@ const profilerec = require('./routes/profilerec');
 const profileapp = require('./routes/profileapp');
 const apply = require('./routes/apply');
 
-
 //Middleware
 app.use(bodyParser.json());
 app.use(cors());

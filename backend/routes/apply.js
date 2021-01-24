@@ -30,5 +30,21 @@ router.post('/app',(req,res) => {
     });
 })
 
+router.post('/state',(req,res) => {
 
+    console.log(req.body.id , req.body.state);
+    Apply.findOne({ _id: req.body.id }, function (err, user1) {
+        if(req.body.state === "Applied")
+        {
+            user1.type = "Shortlisted"
+        }
+        else if(req.body.state === "Shortlisted")
+        {
+            user1.type = "Accepted"
+        }
+        user1.save();
+        return res.json(user1);
+    });
+
+});
 module.exports  = router;

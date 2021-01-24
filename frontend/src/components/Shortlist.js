@@ -30,6 +30,7 @@ class RecMyjob extends Component {
             applications: [],
             varr: false
         };
+        this.changestate = this.changestate.bind(this);
     }
 
     async componentWillMount(){
@@ -52,7 +53,7 @@ class RecMyjob extends Component {
             .then(response => {
                 return response.data;
            });
-           console.log(arrr.name);
+         //  console.log(arrr.name);
            alldata.recname = arrr.name;
            alldata.varr = 1;
             return alldata;
@@ -62,11 +63,28 @@ class RecMyjob extends Component {
             applications: data
     });
     let neww = await data.filter( items => items.rec === curr );
-        console.log(neww);
+      //  console.log(neww);
         this.setState({
                 applications: neww
         });
 
+    }
+    changestate(idd,state,event){
+        event.preventDefault();
+        const edit = {
+            id: idd,
+            state: state
+        }
+        console.log(edit);
+        axios.post('http://localhost:5000/apply/state', edit)
+                    .then(res => {
+                        console.log(res.data);
+
+                    })
+                    .catch(err => {
+                            alert(err);
+                    });
+        window.location.reload();
     }
 
             render() {
@@ -99,8 +117,10 @@ class RecMyjob extends Component {
                                             <td>{job.rating}</td>
                                             <td>{job.type}</td>
                                             <td>{job.date}</td>
-                                            <td>
-                                            { job.varr ? <Button color="primary" >Applied</Button>: <Button variant="contained" onClick={()=> {} }>view</Button> }  </td>
+                                            <th> {job.type === "Applied" ?  <Button style = {{backgroundColor:'green'}} variant="contained" onClick={(event)=>{this.changestate(job._id,job.type,event)}}>Shortlist</Button> : (  job.type === "Shortlisted" ?  <Button style = {{backgroundColor:'green'}} variant="contained" onClick={(event)=>{this.changestate(job._id,job.type,event)}}>Accept</Button> : <Button style = {{backgroundColor:'red'}} variant="contained" onClick={()=>{}}>Khtm tata bye</Button> )} </th>
+                                            <th>
+                                    { job.type === "Accepted" ?   <Button  style = {{color:'red'}}  color="primary" disabled>Full</Button> : <Button style = {{backgroundColor:'red'}} variant="contained" onClick={()=>{}}>Reject</Button> } </th>
+                                             
                                         </tr>
                                         
                                     )
