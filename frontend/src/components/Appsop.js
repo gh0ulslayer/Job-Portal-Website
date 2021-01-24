@@ -22,6 +22,8 @@ export default class EditJob extends Component {
     onChangereview(event) {
         this.setState({ review: event.target.value });
     }
+   
+
     onSubmit(e) {
         e.preventDefault();
         let edit = {
@@ -30,7 +32,7 @@ export default class EditJob extends Component {
             app: this.state.app,
             review: this.state.review
         }
-        console.log(edit);
+        console.log('1000');
         axios.post('http://localhost:5000/apply', edit)
             .then(response => {
                 console.log(response.data.message);
@@ -56,7 +58,7 @@ export default class EditJob extends Component {
                     </div>
                    
                     <div className="form-group">
-                        <input type="submit" value="Submit" className="btn btn-primary"/>
+                        <input type="submit" value="Submit" className="btn btn-primary" />
                     </div>
                 </form>
             </div>

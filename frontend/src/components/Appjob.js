@@ -50,6 +50,7 @@ class Appjob extends Component {
         this.filterbydurr = this.filterbydurr.bind(this);
         this.filterbyj_type = this.filterbyj_type.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.subcount= this.subcount.bind(this);
 
     }
     onChangesearch(event) {
@@ -120,7 +121,7 @@ class Appjob extends Component {
             .then(response => {
                 return response.data;
            });
-           console.log(arrr.name);
+         //  console.log(arrr.name);
            alldata.recname = arrr.name;
             return alldata;
          
@@ -201,10 +202,38 @@ class Appjob extends Component {
             jobs: neww,
     });
     }
+    subcount() {
+        const idd = localStorage.getItem('userid');
+        let curr = 0;
+        axios.post('http://localhost:5000/profileapp/getrem',{id:idd})
+             .then(response => {
+               console.log(response.data[0]);
+                curr = response.data[0].rem;
+                let edit = {
+                    id: idd,
+                    rem: response.data[0].rem,
+                    ind: 2
+                }
+                console.log(10);
+                axios.post('http://localhost:5000/profileapp/rem', edit)
+                    .then(res => {
+                        console.log(res.data);
+                    })
+                    .catch(err => {
+                            alert(err);
+                    });
+
+            })
+             .catch(function(error) {
+                 console.log(error);
+             });
+
+        
+    }
    
             render() {
                 const curr = localStorage.getItem('userid');
-                console.log(this.state.jobs);
+              //  console.log(this.state.jobs);
                 return (
                     <div>
                         <form onSubmit={this.onSubmit}>
@@ -250,6 +279,7 @@ class Appjob extends Component {
                                     <th>Job Rating</th>
                                     <th>Salary per month</th>
                                     <th>Job Duration</th>
+                                    <th>Job Type</th>
                                     <th>Deadline</th>
                                     <th></th>
                                 </tr>
@@ -264,9 +294,10 @@ class Appjob extends Component {
                                 <td>{job.rating}</td>
                                 <td>{job.salary}</td>
                                 <td>{job.duration}</td>
+                                <td>{job.type}</td>
                                 <td>{job.deadline}</td>
                                 <th>
-                                        <Link to={{ pathname: './sop', state: { 'jobid': job._id , 'app': curr , 'rec': job.rec} }}>Apply</Link></th> 
+                                        <Link to={{ pathname: './sop', state: { 'jobid': job._id , 'app': curr , 'rec': job.rec} }} onClick={() => this.subcount()}>Apply</Link></th> 
                                 </tr>
                                 
                                    )

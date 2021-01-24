@@ -23,6 +23,10 @@ const Profileapp = new Schema({
         type: String,
         required: true
     },
+    rem:{
+        type: String,
+        default: 10
+    },
     date: {
         type: Date,
         default: Date.now,

@@ -50,7 +50,7 @@ class App extends React.Component {
            <Route path="/Rec-profile" component={RecProfile}/>
            <Route path="/App-jobs" component={Appjob}/>
            <Route path="/recprofileedit" component={EditRec}/>
-           <Route path="/recprofileedit" component={EditRec}/>
+           <Route path="/appprofileedit" component={EditApp}/>
            <Route path="/jobedit" component={EditJob}/>
            <Route path="/App-profile" component={AppProfile}/>
            <Route path="/App-application" component={Appapplication}/>
