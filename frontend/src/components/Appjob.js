@@ -81,7 +81,7 @@ class Appjob extends Component {
         console.log(Search);
         axios.post('http://localhost:5000/job/search', Search)
              .then(res => {
-                console.log(res.data);
+          //      console.log(res.data);
                 this.setState({jobs: res.data});
 
             })
@@ -124,19 +124,16 @@ class Appjob extends Component {
          //  console.log(arrr.name);
            alldata.recname = arrr.name;
            const idd = localStorage.getItem('userid');
-
-           axios.post('http://localhost:5000/profileapp/getrem',{id:idd})
-                .then(resss => {
-                  console.log(resss.data[0]);
-                   alldata.rem = resss.data[0].rem;
-               })
-                .catch(function(error) {
-                    console.log(error);
-                });
+           let lol = 0;
+           let arrrr = await axios.post('http://localhost:5000/profileapp/getrem',{id:idd})
+            .then(response => {
+                return response.data;
+           });
+           alldata.rem = arrrr[0].rem;
+            //    console.log(alldata);
            return alldata;
         
         }));
-
         this.setState({
             jobs: data,
             minsalary: this.state.minsalary,
@@ -218,7 +215,7 @@ class Appjob extends Component {
         let curr = 0;
         axios.post('http://localhost:5000/profileapp/getrem',{id:idd})
              .then(response => {
-               console.log(response.data[0]);
+             //  console.log(response.data[0]);
                 curr = response.data[0].rem;
                 let edit = {
                     id: idd,
@@ -228,7 +225,7 @@ class Appjob extends Component {
                 console.log(10);
                 axios.post('http://localhost:5000/profileapp/rem', edit)
                     .then(res => {
-                        console.log(res.data);
+                      //  console.log(res.data);
                     })
                     .catch(err => {
                             alert(err);
@@ -292,6 +289,7 @@ class Appjob extends Component {
                                     <th>Job Duration</th>
                                     <th>Job Type</th>
                                     <th>Deadline</th>
+                                    <th>remaining applications</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -308,8 +306,11 @@ class Appjob extends Component {
                                 <td>{job.duration}</td>
                                 <td>{job.type}</td>
                                 <td>{job.deadline}</td>
-                                <td>
-                                            { job.rem ?  <Button  style = {{color:'green'}}  color="primary" disabled>Full</Button>:<Link to={{ pathname: './sop', state: { 'jobid': job._id , 'app': curr , 'rec': job.rec} }} onClick={() => this.subcount()}> <Button style = {{backgroundColor:'red'}} variant="contained" onClick={()=>{}}>Apply</Button></Link> }</td>
+                                <th>
+                                            { job.rem > 0    ?    <Link to={{ pathname: './sop', state: { 'jobid': job._id , 'app': curr , 'rec': job.rec} }} onClick={() => this.subcount()}> <Button style = {{backgroundColor:'green'}} variant="contained" onClick={()=>{}}>Apply</Button></Link> : <Button  style = {{color:'red'}}  color="primary" disabled>Full</Button> }</th>
+                                <td> 
+                               
+                                </td>
                                 </tr>
                                 
                                    )
