@@ -119,7 +119,7 @@ class RecMyjob extends Component {
                                             <td>{job.date}</td>
                                             <th> {job.type === "Applied" ?  <Button style = {{backgroundColor:'green'}} variant="contained" onClick={(event)=>{this.changestate(job._id,job.type,event)}}>Shortlist</Button> : (  job.type === "Shortlisted" ?  <Button style = {{backgroundColor:'green'}} variant="contained" onClick={(event)=>{this.changestate(job._id,job.type,event)}}>Accept</Button> : <Button style = {{backgroundColor:'red'}} variant="contained" onClick={()=>{}}>Khtm tata bye</Button> )} </th>
                                             <th>
-                                    { job.type === "Accepted" ?   <Button  style = {{color:'red'}}  color="primary" disabled>Full</Button> : <Button style = {{backgroundColor:'red'}} variant="contained" onClick={()=>{}}>Reject</Button> } </th>
+                                    { job.type === "Accepted" ?   <Button  style = {{color:'red'}}  color="primary" disabled>Full</Button> : <Button style = {{backgroundColor:'red'}} variant="contained" onClick={(event)=>{this.changestate(job._id,"Rejected",event)}}>Reject</Button> } </th>
                                              
                                         </tr>
                                         

@@ -42,4 +42,11 @@ router.post('/app',(req,res) => {
     });
 })
 
+router.post('/getname',(req,res) => {
+
+    Job.findOne({ _id: req.body.id }, function (err, user1) {
+        return res.json(user1);
+    });
+})
+
 module.exports  = router;

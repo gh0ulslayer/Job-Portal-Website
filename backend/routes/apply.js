@@ -42,6 +42,10 @@ router.post('/state',(req,res) => {
         {
             user1.type = "Accepted"
         }
+        else if(req.body.state === "Rejected")
+        {
+            user1.type = "Rejected"
+        }
         user1.save();
         return res.json(user1);
     });

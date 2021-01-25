@@ -20,20 +20,21 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import { Link } from 'react-router-dom';
 
-class RecReqjob extends Component {
+class RecMyjob extends Component {
     
     constructor(props) {
         super(props);
         this.state = {
-            jobs: []
+            applications: []
         };
     }
 
     async componentWillMount(){
         let curr = localStorage.getItem('userid');
 
-        let arr = await axios.get('http://localhost:5000/job')
+        let arr = await axios.get('http://localhost:5000/apply')
              .then(response => {
                 return response.data;
             })
@@ -41,39 +42,79 @@ class RecReqjob extends Component {
                  console.log(error);
              });
 
-        let neww = await arr.filter( items => items.rec === curr );
-        console.log(neww);
+        
+        const data = await Promise.all( arr.map(async function(job, i){
+            let alldata = {};
+            alldata = {...job};
+            
+            let arrr = await axios.post('http://localhost:5000/user/getname', { id: job.app})
+            .then(response => {
+                return response.data;
+           });
+         //  console.log(arrr.name);
+           alldata.recname = arrr.name;
+           alldata.varr = 1;
+           let arrrr = await axios.post('http://localhost:5000/job/getname', { id: job.jobid})
+            .then(response => {
+                console.log(response.data);
+                return response.data;
+           });
+           alldata.jobname = arrrr.title;
+           alldata.typee = arrrr.type;
+            return alldata;
+         
+        }));
         this.setState({
-                jobs: neww
+            applications: data
+    });
+    let neww = await data.filter( items => items.rec === curr );
+      //  console.log(neww);
+        this.setState({
+                applications: neww
+        });
+
+        const currr = "Accepted";
+        let newww = await data.filter( items => items.type === currr );
+        this.setState({
+                applications: newww
         });
 
     }
-
+    
             render() {
                 return (
                     <div>
+                       
                         <table className="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Job</th>
-                                    <th>Positions remaining</th>
-                                    <th>Total job requests</th>
-                                    <th>Date of Posting</th>
+                                    <th>Name</th>
+                                    <th>Job Title</th>
+                                    <th>Job Type</th>
+
+                                    <th>Rating</th>
+                                    <th>Stage</th>
+                                    <th>Date of Application</th>
 
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                             { 
-                                this.state.jobs.map((job, i) => {
+                                this.state.applications.map((job, i) => {
+                                    let varr = false;
                                     return (
+                                        
                                         <tr key={i}>
-                                            <td>{job.title}</td>
-                                            <td>{job.maxpos}</td>
-                                            <td>{job.maxapp}</td>
+                                            <td>{job.recname}</td>
+                                            <td>{job.jobname}</td>
+                                            <td>{job.typee}</td>
+                                            <td>{job.rating}</td>
+                                            <td>{job.type}</td>
                                             <td>{job.date}</td>
                                             
                                         </tr>
+                                        
                                     )
                                 })
                             }
@@ -84,4 +125,4 @@ class RecReqjob extends Component {
             }
 }
 
-export default RecReqjob;
+export default RecMyjob;
