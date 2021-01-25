@@ -28,6 +28,7 @@ class Appjob extends Component {
         super(props);
         this.state = {
             jobs: [],
+            already_applied: [],
             search: '',
             minsalary: '',
             maxsalary: '',
@@ -113,6 +114,14 @@ class Appjob extends Component {
                 minsalary: this.state.minsalary,
                 maxsalary: this.state.maxsalary
         });
+        axios.post("http://localhost:5000/apply/app",{id:curr})
+             .then(response =>{
+                 console.log(response.data)
+                this.setState({already_applied: response.data});
+             })
+             .catch(function(error) {
+               window.alert("post error")
+           })
         const data = await Promise.all( arr.map(async function(job, i){
             let alldata = {};
             alldata = {...job};
@@ -316,7 +325,17 @@ class Appjob extends Component {
                             <tbody>
                             { 
                                this.state.jobs.map((job,i)=> {
-                                   return(
+                                var array=[...this.state.already_applied]
+                                // console.log(array);
+                                        let mark=false;
+                                        for(var j=0;j<array.length;j++)
+                                        {
+                                            if(array[j].jobid===job._id)
+                                            {
+                                                mark=true
+                                            }
+                                        }   
+                                return(
                                     
                                 <tr key={i}>
                                 <td>{job.title}</td>
@@ -326,8 +345,9 @@ class Appjob extends Component {
                                 <td>{job.duration}</td>
                                 <td>{job.type}</td>
                                 <td>{job.deadline}</td>
+                                
                                 <th>
-                                            { job.rem > 0    ?    <Link to={{ pathname: './sop', state: { 'jobid': job._id , 'app': curr , 'rec': job.rec} }} onClick={() => this.subcount()}> <Button style = {{backgroundColor:'green'}} variant="contained" onClick={()=>{}}>Apply</Button></Link> : <Button  style = {{color:'red'}}  color="primary" disabled>Full</Button> }</th>
+                                            { job.rem > 0    ?  ( !mark ? <Link to={{ pathname: './sop', state: { 'jobid': job._id , 'app': curr , 'rec': job.rec} }} onClick={() => this.subcount()}> <Button style = {{backgroundColor:'green'}} variant="contained" onClick={()=>{}}>Apply</Button></Link> : <Button style = {{backgroundColor:'lime'}} variant="contained" >Applied</Button>)   : <Button  style = {{color:'red'}}  color="primary" disabled>Full</Button> }</th>
                                 <td> 
                                
                                 </td>
