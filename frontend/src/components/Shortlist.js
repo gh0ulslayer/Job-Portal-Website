@@ -31,8 +31,31 @@ class RecMyjob extends Component {
             varr: false
         };
         this.changestate = this.changestate.bind(this);
+        this.sortbyname = this.sortbyname.bind(this);
+        this.sortbydname = this.sortbydname.bind(this);
+        this.sortbytitle = this.sortbytitle.bind(this);
+        this.sortbydtitle= this.sortbydtitle.bind(this);
+        this.sortbyrating = this.sortbyrating.bind(this);
+        this.sortbydrating = this.sortbydrating.bind(this);
     }
 
+    changestate(idd,state,event){
+        event.preventDefault();
+        const edit = {
+            id: idd,
+            state: state
+        }
+        console.log(edit);
+        axios.post('http://localhost:5000/apply/state', edit)
+                    .then(res => {
+                        console.log(res.data);
+
+                    })
+                    .catch(err => {
+                            alert(err);
+                    });
+        window.location.reload();
+    }
     async componentWillMount(){
         let curr = localStorage.getItem('userid');
 
@@ -67,30 +90,75 @@ class RecMyjob extends Component {
         this.setState({
                 applications: neww
         });
-
+        const currr = "Accepted";
+        let newww = await neww.filter( items => items.type != currr );
+        this.setState({
+                applications: newww
+        });
+        const currrr = "Rejected";
+        let newwww = await newww.filter( items => items.type != currrr );
+        this.setState({
+                applications: newwww
+        });
     }
-    changestate(idd,state,event){
-        event.preventDefault();
-        const edit = {
-            id: idd,
-            state: state
-        }
-        console.log(edit);
-        axios.post('http://localhost:5000/apply/state', edit)
-                    .then(res => {
-                        console.log(res.data);
-
-                    })
-                    .catch(err => {
-                            alert(err);
-                    });
-        window.location.reload();
+    
+    sortbyname = () => {
+        let thiss  = this.state.applications;
+        thiss.sort((a,b) => (a.recname > b.recname) ? 1 : -1);
+        this.setState({
+            applications: thiss
+    });
     }
-
+    sortbydname = () => {
+        let thiss  = this.state.applications;
+        thiss.sort((a,b) => (a.recname < b.recname) ? 1 : -1);
+        this.setState({
+            applications: thiss
+    });
+    }
+    sortbytitle = () => {
+        let thiss  = this.state.applications;
+        thiss.sort((a,b) => (a.title > b.title) ? 1 : -1);
+        this.setState({
+            applications: thiss
+    });
+    }
+    sortbydtitle = () => {
+        let thiss  = this.state.applications;
+        thiss.sort((a,b) => (a.title < b.title) ? 1 : -1);
+        this.setState({
+            applications: thiss
+    });
+    }
+    sortbyrating = () => {
+        let thiss  = this.state.applications;
+        thiss.sort((a,b) => (a.rating > b.rating) ? 1 : -1);
+        this.setState({
+            applications: thiss
+    });
+    }
+    sortbydrating = () => {
+        let thiss  = this.state.applications;
+        thiss.sort((a,b) => (a.rating < b.rating) ? 1 : -1);
+        this.setState({
+            applications: thiss
+    });
+    }
             render() {
                 return (
                     <div>
-                       
+                       <form>
+                        <Button style = {{backgroundColor:'purple'}} variant="contained"  onClick={this.sortbyname} >Sort By Name</Button>
+                        <Button style = {{backgroundColor:'purple'}} variant="contained"  onClick={this.sortbydname} >Sort By Name(D)</Button>
+                        </form>
+                        <form>
+                        <Button style = {{backgroundColor:'lime'}} variant="contained"  onClick={this.sortbytitle} >Sort By Title</Button>
+                        <Button style = {{backgroundColor:'lime'}} variant="contained"  onClick={this.sortbydtitle} >Sort By Title(D)</Button>
+                        </form>
+                        <form>
+                        <Button style = {{backgroundColor:'orange'}} variant="contained"  onClick={this.sortbyrating} >Sort By Rating</Button>
+                        <Button style = {{backgroundColor:'orange'}} variant="contained"  onClick={this.sortbydrating} >Sort By Rating(D)</Button>
+                        </form>
                         <table className="table table-striped">
                             <thead>
                                 <tr>
@@ -117,9 +185,9 @@ class RecMyjob extends Component {
                                             <td>{job.rating}</td>
                                             <td>{job.type}</td>
                                             <td>{job.date}</td>
-                                            <th> {job.type === "Applied" ?  <Button style = {{backgroundColor:'green'}} variant="contained" onClick={(event)=>{this.changestate(job._id,job.type,event)}}>Shortlist</Button> : (  job.type === "Shortlisted" ?  <Button style = {{backgroundColor:'green'}} variant="contained" onClick={(event)=>{this.changestate(job._id,job.type,event)}}>Accept</Button> : <Button style = {{backgroundColor:'red'}} variant="contained" onClick={()=>{}}>Khtm tata bye</Button> )} </th>
+                                            <th> {job.type === "Applied" ?  <Button style = {{backgroundColor:'aqua'}} variant="contained" onClick={(event)=>{this.changestate(job._id,job.type,event)}}>Shortlist</Button> : (  job.type === "Shortlisted" ?  <Button style = {{backgroundColor:'yellow'}} variant="contained" onClick={(event)=>{this.changestate(job._id,job.type,event)}}>Accept</Button> : <Button style = {{backgroundColor:'green'}} variant="contained" onClick={()=>{}}>Badhai Ho</Button> )} </th>
                                             <th>
-                                    { job.type === "Accepted" ?   <Button  style = {{color:'red'}}  color="primary" disabled>Full</Button> : <Button style = {{backgroundColor:'red'}} variant="contained" onClick={(event)=>{this.changestate(job._id,"Rejected",event)}}>Reject</Button> } </th>
+                                    { job.type === "Accepted" ?   <Button  style = {{color:'red'}}  color="primary" disabled></Button> : <Button style = {{backgroundColor:'red'}} variant="contained" onClick={(event)=>{this.changestate(job._id,"Rejected",event)}}>Reject</Button> } </th>
                                              
                                         </tr>
                                         

@@ -29,6 +29,12 @@ class RecMyjob extends Component {
         this.state = {
             applications: []
         };
+        this.sortbyname = this.sortbyname.bind(this);
+        this.sortbydname = this.sortbydname.bind(this);
+        this.sortbytitle = this.sortbytitle.bind(this);
+        this.sortbydtitle= this.sortbydtitle.bind(this);
+        this.sortbyrating = this.sortbyrating.bind(this);
+        this.sortbydrating = this.sortbydrating.bind(this);
     }
 
     async componentWillMount(){
@@ -74,16 +80,73 @@ class RecMyjob extends Component {
         });
 
         const currr = "Accepted";
-        let newww = await data.filter( items => items.type === currr );
+        let newww = await neww.filter( items => items.type === currr );
         this.setState({
                 applications: newww
         });
-
+        
     }
-    
+    sortbyname = () => {
+        let thiss  = this.state.applications;
+        thiss.sort((a,b) => (a.recname > b.recname) ? 1 : -1);
+        this.setState({
+            applications: thiss
+    });
+    }
+    sortbydname = () => {
+        let thiss  = this.state.applications;
+        thiss.sort((a,b) => (a.recname < b.recname) ? 1 : -1);
+        this.setState({
+            applications: thiss
+    });
+    }
+    sortbytitle = () => {
+        let thiss  = this.state.applications;
+        thiss.sort((a,b) => (a.title > b.title) ? 1 : -1);
+        this.setState({
+            applications: thiss
+    });
+    }
+    sortbydtitle = () => {
+        let thiss  = this.state.applications;
+        thiss.sort((a,b) => (a.title < b.title) ? 1 : -1);
+        this.setState({
+            applications: thiss
+    });
+    }
+    sortbyrating = () => {
+        let thiss  = this.state.applications;
+        thiss.sort((a,b) => (a.rating > b.rating) ? 1 : -1);
+        this.setState({
+            applications: thiss
+    });
+    }
+    sortbydrating = () => {
+        let thiss  = this.state.applications;
+        thiss.sort((a,b) => (a.rating < b.rating) ? 1 : -1);
+        this.setState({
+            applications: thiss
+    });
+    }
             render() {
                 return (
                     <div>
+                        <form>
+                        <Button style = {{backgroundColor:'purple'}} variant="contained"  onClick={this.sortbyname} >Sort By Name</Button>
+                        <Button style = {{backgroundColor:'purple'}} variant="contained"  onClick={this.sortbydname} >Sort By Name(D)</Button>
+                        </form>
+                        <form>
+                        <Button style = {{backgroundColor:'lime'}} variant="contained"  onClick={this.sortbytitle} >Sort By Title</Button>
+                        <Button style = {{backgroundColor:'lime'}} variant="contained"  onClick={this.sortbydtitle} >Sort By Title(D)</Button>
+                        </form>
+                        <form>
+                        <Button style = {{backgroundColor:'orange'}} variant="contained"  onClick={this.sortbyrating} >Sort By Rating</Button>
+                        <Button style = {{backgroundColor:'orange'}} variant="contained"  onClick={this.sortbydrating} >Sort By Rating(D)</Button>
+                        </form>
+                        <form>
+                        <Button style = {{backgroundColor:'yellow'}} variant="contained"  onClick={this.sortbyname} >Sort By Name</Button>
+                        <Button style = {{backgroundColor:'yellow'}} variant="contained"  onClick={this.sortbyname} >Sort By Name</Button>
+                        </form>
                        
                         <table className="table table-striped">
                             <thead>
@@ -91,10 +154,8 @@ class RecMyjob extends Component {
                                     <th>Name</th>
                                     <th>Job Title</th>
                                     <th>Job Type</th>
-
                                     <th>Rating</th>
-                                    <th>Stage</th>
-                                    <th>Date of Application</th>
+                                    <th>Date of Joining</th>
 
                                     <th></th>
                                 </tr>
@@ -110,8 +171,6 @@ class RecMyjob extends Component {
                                             <td>{job.jobname}</td>
                                             <td>{job.typee}</td>
                                             <td>{job.rating}</td>
-                                            <td>{job.type}</td>
-                                            <td>{job.date}</td>
                                             
                                         </tr>
                                         
