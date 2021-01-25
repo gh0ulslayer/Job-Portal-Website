@@ -62,7 +62,7 @@ class RecMyjob extends Component {
            alldata.varr = 1;
            let arrrr = await axios.post('http://localhost:5000/job/getname', { id: job.jobid})
             .then(response => {
-                console.log(response.data);
+              //  console.log(response.data);
                 return response.data;
            });
            alldata.jobname = arrrr.title;
@@ -108,14 +108,15 @@ class RecMyjob extends Component {
     }
     sortbytitle = () => {
         let thiss  = this.state.applications;
-        thiss.sort((a,b) => (a.title > b.title) ? 1 : -1);
+        console.log(thiss)
+        thiss.sort((a,b) => (a.jobname > b.jobname) ? 1 : -1);
         this.setState({
             applications: thiss
     });
     }
     sortbydtitle = () => {
         let thiss  = this.state.applications;
-        thiss.sort((a,b) => (a.title < b.title) ? 1 : -1);
+        thiss.sort((a,b) => (a.jobname < b.jobname) ? 1 : -1);
         this.setState({
             applications: thiss
     });
@@ -177,7 +178,11 @@ class RecMyjob extends Component {
                                             <td>{job.jobname}</td>
                                             <td>{job.typee}</td>
                                             <td>{job.rating}</td>
-                                            
+                                            <td>{job.doj}</td>
+
+                                            <th>
+                                        <Link to={{ pathname: './rateapp', state: { 'id': job.app} }}>Rate</Link></th>    
+
                                         </tr>
                                         
                                     )

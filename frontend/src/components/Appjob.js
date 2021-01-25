@@ -140,10 +140,10 @@ class Appjob extends Component {
                 return response.data;
            });
            alldata.rem = arrrr[0].rem;
-           console.log(jobbid);
+         //  console.log(jobbid);
            let arrrrr = await axios.post('http://localhost:5000/job/getapp',{id:jobbid})
             .then(response => {
-                console.log(response.data);
+           //     console.log(response.data);
                 return response.data;
            });
            alldata.remaining = arrrrr.maxapp;
@@ -357,7 +357,7 @@ class Appjob extends Component {
                                 
                                 
                                 <th>
-                                    { job.maxapp ? (job.rem > 0    ?  ( !mark ? <Link to={{ pathname: './sop', state: { 'jobid': job._id , 'app': curr , 'rec': job.rec} }} onClick={() => this.subcount()}> <Button style = {{backgroundColor:'green'}} variant="contained" onClick={()=>{}}>Apply</Button></Link> : <Button style = {{backgroundColor:'lime'}} variant="contained" >Applied</Button>)   : <Button  style = {{color:'red'}}  color="primary" disabled>Limit Reached</Button>) : <Button  style = {{color:'red'}}  color="primary" disabled>Full</Button> }</th>
+                                    { job.maxapp ? ( job.rem > 0    ?  ( !mark ? <Link to={{ pathname: './sop', state: { 'jobid': job._id , 'app': curr , 'rec': job.rec} }} onClick={() => this.subcount()}> <Button style = {{backgroundColor:'green'}} variant="contained" onClick={()=>{}}>Apply</Button></Link> : <Button style = {{backgroundColor:'lime'}} variant="contained" >Applied</Button>)   : <Button  style = {{color:'red'}}  color="primary" disabled>Limit Reached</Button>) : <Button  style = {{color:'red'}}  color="primary" disabled>Full</Button> }</th>
                                 <td> 
                                
                                 </td>
