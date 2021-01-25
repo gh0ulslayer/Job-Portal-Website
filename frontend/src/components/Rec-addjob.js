@@ -9,20 +9,32 @@ export default class CreateUser extends Component {
             title: '',
             salary:'',
             maxpos:'',
+            maxapp:'',
+            deadline:'',
+            duration:0,
             type: "F"
         }
         this.onChangetitle = this.onChangetitle.bind(this);
         this.onChangesalary = this.onChangesalary.bind(this);
         this.onChangeType = this.onChangeType.bind(this);
         this.onChangemaxpos = this.onChangemaxpos.bind(this);
+        this.onChangemaxapp = this.onChangemaxapp.bind(this);
+        this.onChangedeadline = this.onChangedeadline.bind(this);
+        this.onChangeduration = this.onChangeduration.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
     
     onChangetitle(event) {
         this.setState({ title: event.target.value });
     }
+     
+    onChangedeadline(event) {
+        this.setState({ deadline: event.target.value });
+    }
 
-
+    onChangeduration(event) {
+        this.setState({ duration: event.target.value });
+    }
     onChangeType(event) {
         this.setState({ type: event.target.value });
     }
@@ -41,6 +53,9 @@ export default class CreateUser extends Component {
         this.setState({  maxpos: event.target.value });
     }
 
+    onChangemaxapp(event) {
+        this.setState({  maxapp: event.target.value });
+    }
     onSubmit(e) {
         e.preventDefault();
 
@@ -51,6 +66,9 @@ export default class CreateUser extends Component {
             type: this.state.type,
             salary: this.state.salary,
             maxpos: this.state.maxpos,
+            maxapp: this.state.maxapp,
+            deadline: this.state.deadline,
+            duration: this.state.duration,
             rec: curr
         }
         console.log(newJob);
@@ -70,6 +88,9 @@ export default class CreateUser extends Component {
             name: '',
             salary : '',
             maxpos : '',
+            maxapp : '',
+            deadline: '',
+            duration: 0,
             type: 'F'
         });
     }
@@ -107,13 +128,43 @@ export default class CreateUser extends Component {
                                />  
                     </div>     
                    
-
+                    <div className="form-group">
+                        <label>Max Applications: </label>
+                        <input type="text" 
+                               className="form-control" 
+                               value={this.state.maxapp}
+                               onChange={this.onChangemaxapp}
+                               />  
+                    </div>     
+                   
+                    <div className="form-group">
+                        <label>Deadline of Application: </label>
+                        <input type="date" 
+                               className="form-control" 
+                               value={this.state.deadline}
+                               onChange={this.onChangedeadline}
+                               />  
+                    </div>     
+ 
                     <div className="form-group">
                         <label>Type: </label>
                         <select className="form-control"  value={this.state.type} onChange={this.onChangeType}> 
                             <option name="F" value="F">Full Time</option>
                             <option name="P" value="P">Part Time</option>
                             <option name="W" value="W">Work From Home</option>
+                        </select>
+                    </div>
+
+                    <div className="form-group">
+                        <label>Duration: </label>
+                        <select className="form-control"  value={this.state.duration} onChange={this.onChangeduration}> 
+                            <option name="0" value="0">0</option>
+                            <option name="1" value="1">1</option>
+                            <option name="2" value="2">2</option>
+                            <option name="3" value="3">3</option>
+                            <option name="4" value="4">4</option>
+                            <option name="5" value="5">5</option>
+                            <option name="6" value="6">6</option>
                         </select>
                     </div>
 

@@ -24,8 +24,12 @@ const Profileapp = new Schema({
         required: true
     },
     rem:{
-        type: String,
+        type: Number,
         default: 10
+    },
+    rating:{
+        type: Number,
+        default: 0
     },
     date: {
         type: Date,

@@ -27,6 +27,7 @@ class RecMyjob extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            thisjob:this.props.location.state.id,
             applications: [],
             varr: false
         };
@@ -100,6 +101,10 @@ class RecMyjob extends Component {
         this.setState({
                 applications: newwww
         });
+        let newwwww = await newwww.filter( items => items.jobid === this.state.thisjob );
+        this.setState({
+                applications: newwwww
+        });
     }
     
     sortbyname = () => {
@@ -165,6 +170,7 @@ class RecMyjob extends Component {
                                     <th>Name</th>
                                     <th>SOP</th>
                                     <th>Education</th>
+                                    <th>Skills</th>
                                     <th>Rating</th>
                                     <th>Stage</th>
                                     <th>Date of Application</th>
@@ -182,6 +188,7 @@ class RecMyjob extends Component {
                                             <td>{job.recname}</td>
                                             <td>{job.review}</td>
                                             <td>{job.education}</td>
+                                            <td>{job.skills}</td>
                                             <td>{job.rating}</td>
                                             <td>{job.type}</td>
                                             <td>{job.date}</td>

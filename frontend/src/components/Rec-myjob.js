@@ -59,6 +59,7 @@ class RecMyjob extends Component {
                                     <th>Job</th>
                                     <th>Positions remaining</th>
                                     <th>Total job requests</th>
+                                    <th>Date of Posting</th>
 
                                     <th></th>
                                 </tr>
@@ -72,8 +73,9 @@ class RecMyjob extends Component {
                                             <Link to={{ pathname: './shortlist', state: { 'id': job._id} }}>{job.title}</Link></th>
                                             <td>{job.maxpos}</td>
                                             <td>{job.maxapp}</td>
+                                            <td>{job.date}</td>
                                             <th>
-                                        <Link to={{ pathname: './jobedit', state: { 'id': job._id, 'maxpos':job.maxpos, 'maxapp':job.maxapp} }}>Edit</Link></th>    
+                                        <Link to={{ pathname: './jobedit', state: { 'id': job._id, 'maxpos':job.maxpos, 'maxapp':job.maxapp, 'deadline':job.deadline} }}>Edit</Link></th>    
                                        <th>
                                         <Link to={{ pathname: './recprofileedit', state: { 'id': job._id, 'name':job.title} }}>Delete</Link></th>    
                                            

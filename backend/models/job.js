@@ -17,10 +17,18 @@ const Job = new Schema({
     },
     maxapp: {
         type: Number,
-        default: 0,
-        required: false
+        required: true
     },
-     
+    duration: {
+        type: Number,
+        enum: [0,1,2,3,4,5,6],
+        required: true
+    },
+    rating: {
+        type: Number,
+        default: 0,
+        required: true
+    },
     rec: {
         type: String,
         required: true
@@ -29,6 +37,10 @@ const Job = new Schema({
     type: {
         type: String,
         enum: ['F','P','W'],
+        required: true
+    },
+    deadline: {
+        type: Date,
         required: true
     },
     date: {

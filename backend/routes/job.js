@@ -18,6 +18,9 @@ router.post('/',(req,res) => {
         title: req.body.title,
         salary: req.body.salary,
         maxpos: req.body.maxpos,
+        deadline: req.body.deadline,
+        duration: req.body.duration,
+        maxapp: req.body.maxapp,
         type: req.body.type,
         rec: req.body.rec
     });
@@ -48,5 +51,17 @@ router.post('/getname',(req,res) => {
         return res.json(user1);
     });
 })
+
+router.post('/edit',(req,res) => {
+
+    console.log(req.body.id);
+    Job.findOneAndUpdate({ _id: req.body.id } , { 
+        maxapp:req.body.maxapp,
+        maxpos:req.body.maxpos,
+        deadline:req.body.deadline,
+     })
+    .then(e => res.json(e))
+    .catch(err => res.json(err));
+});
 
 module.exports  = router;
