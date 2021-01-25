@@ -277,21 +277,28 @@ class Appjob extends Component {
                                onChange={this.onChangemaxsalary}
                                />  
                         <Button  onClick={this.filterbysalary} >Filter by salary</Button>
-                        <br></br>
-                        <label> Duration: </label>
-                        <input type="number" 
-                               value={this.state.duration}
-                               onChange={this.onChangeduration}
-                               />
+                        <div className="form-group">
+                        <label>Duration: </label>
+                        <select className="form-control"  value={this.state.duration} onChange={this.onChangeduration}> 
+                            <option name="0" value="0">0</option>
+                            <option name="1" value="1">1</option>
+                            <option name="2" value="2">2</option>
+                            <option name="3" value="3">3</option>
+                            <option name="4" value="4">4</option>
+                            <option name="5" value="5">5</option>
+                            <option name="6" value="6">6</option>
+                        </select>
                         <Button  onClick={this.filterbyduration} >Filter by Duration</Button>
-                        <br></br>
-                        <label> Type: </label>
-                        <input type="text" 
-                               value={this.state.j_type}
-                               onChange={this.onChangej_type}
-                               />
+                    </div>
+                        <div className="form-group">
+                        <label>Type: </label>
+                        <select className="form-control"  value={this.state.j_type} onChange={this.onChangej_type}> 
+                            <option name="F" value="F">Full Time</option>
+                            <option name="P" value="P">Part Time</option>
+                            <option name="W" value="W">Work From Home</option>
+                        </select>
                         <Button  onClick={this.filterbyj_type} >Filter by Type</Button>
-
+                    </div>
                         <table className="table table-striped">
                             <thead>
                                 <tr>
