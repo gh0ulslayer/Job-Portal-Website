@@ -64,4 +64,36 @@ router.post('/edit',(req,res) => {
     .catch(err => res.json(err));
 });
 
+router.post('/getapp',(req,res) => {
+
+    console.log(0);
+    console.log(req.body.id);
+    console.log(1);
+    Job.findOne({ _id: req.body.id }, function (err, user1) {
+        return res.json(user1);
+    });
+})
+
+//for editing number of max app
+router.post('/editapp',(req,res) => {
+    var curr = req.body.maxapp;
+    let varr  = parseInt(req.body.ind);
+   // console.log(varr);
+   // console.log(curr);
+    if(varr === 1)
+    {
+          curr++;
+    }
+    else
+    {
+        curr--;
+    }
+    //console.log(curr);
+    Job.findOneAndUpdate({ _id: req.body.id } , { 
+        maxapp:curr,
+     })
+    .then(e => res.json(e))
+    .catch(err => res.json(err));
+});
+
 module.exports  = router;

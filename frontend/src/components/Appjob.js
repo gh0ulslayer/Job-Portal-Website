@@ -33,7 +33,8 @@ class Appjob extends Component {
             minsalary: '',
             maxsalary: '',
             duration: 0,
-            j_type: 'F'
+            j_type: 'F',
+            maxapp:''
 
         };
         this.onChangesearch = this.onChangesearch.bind(this);
@@ -116,7 +117,7 @@ class Appjob extends Component {
         });
         axios.post("http://localhost:5000/apply/app",{id:curr})
              .then(response =>{
-                 console.log(response.data)
+//                 console.log(response.data)
                 this.setState({already_applied: response.data});
              })
              .catch(function(error) {
@@ -125,7 +126,7 @@ class Appjob extends Component {
         const data = await Promise.all( arr.map(async function(job, i){
             let alldata = {};
             alldata = {...job};
-            
+            let jobbid = alldata._id;
             let arrr = await axios.post('http://localhost:5000/user/getname', { id: job.rec})
             .then(response => {
                 return response.data;
@@ -139,6 +140,14 @@ class Appjob extends Component {
                 return response.data;
            });
            alldata.rem = arrrr[0].rem;
+           console.log(jobbid);
+           let arrrrr = await axios.post('http://localhost:5000/job/getapp',{id:jobbid})
+            .then(response => {
+                console.log(response.data);
+                return response.data;
+           });
+           alldata.remaining = arrrrr.maxapp;
+           //alldata.maxapp = arrrrr.maxapp;
             //    console.log(alldata);
            return alldata;
         
@@ -346,8 +355,9 @@ class Appjob extends Component {
                                 <td>{job.type}</td>
                                 <td>{job.deadline}</td>
                                 
+                                
                                 <th>
-                                            { job.rem > 0    ?  ( !mark ? <Link to={{ pathname: './sop', state: { 'jobid': job._id , 'app': curr , 'rec': job.rec} }} onClick={() => this.subcount()}> <Button style = {{backgroundColor:'green'}} variant="contained" onClick={()=>{}}>Apply</Button></Link> : <Button style = {{backgroundColor:'lime'}} variant="contained" >Applied</Button>)   : <Button  style = {{color:'red'}}  color="primary" disabled>Full</Button> }</th>
+                                    { job.maxapp ? (job.rem > 0    ?  ( !mark ? <Link to={{ pathname: './sop', state: { 'jobid': job._id , 'app': curr , 'rec': job.rec} }} onClick={() => this.subcount()}> <Button style = {{backgroundColor:'green'}} variant="contained" onClick={()=>{}}>Apply</Button></Link> : <Button style = {{backgroundColor:'lime'}} variant="contained" >Applied</Button>)   : <Button  style = {{color:'red'}}  color="primary" disabled>Limit Reached</Button>) : <Button  style = {{color:'red'}}  color="primary" disabled>Full</Button> }</th>
                                 <td> 
                                
                                 </td>

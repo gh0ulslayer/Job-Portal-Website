@@ -33,11 +33,40 @@ export default class EditJob extends Component {
             review: this.state.review
         }
         console.log('1000');
+        let curr = {
+            jobid: this.state.jobid,
+            idx:0
+        }
+        var idd = this.state.jobid;
+        axios.post('http://localhost:5000/job/getapp',{id:this.state.jobid})
+        .then(response => {
+          console.log(response.data);
+           curr = response.data.maxapp;
+           console.log(curr);
+           let edit = {
+               id: idd,
+               maxapp : curr,
+               ind: 0
+           }
+           console.log(10);
+           axios.post('http://localhost:5000/job/editapp', edit)
+               .then(res => {
+                 //  console.log(res.data);
+               })
+               .catch(err => {
+                       alert(err);
+               });
+
+       })
+        .catch(function(error) {
+            console.log(error);
+        });
+
         axios.post('http://localhost:5000/apply', edit)
             .then(response => {
                 console.log(response.data.message);
-                this.props.history.push("/App-jobs");
-                window.location.reload();
+          //      this.props.history.push("/App-jobs");
+            //    window.location.reload();
             })
             .catch(err => {
                     alert(err);
