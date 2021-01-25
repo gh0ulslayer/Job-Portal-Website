@@ -80,7 +80,12 @@ class RecMyjob extends Component {
          //  console.log(arrr.name);
            alldata.recname = arrr.name;
            alldata.varr = 1;
-            return alldata;
+           let arrrr = await axios.post('http://localhost:5000/profileapp/getrating', { id: job.app})
+            .then(response => {
+                return response.data;
+           }); 
+           alldata.rating = arrrr.rating;
+           return alldata;
          
         }));
         this.setState({
@@ -91,19 +96,15 @@ class RecMyjob extends Component {
         this.setState({
                 applications: neww
         });
-        const currr = "Accepted";
-        let newww = await neww.filter( items => items.type != currr );
+        
+        const currrr = "Rejected";
+        let newww = await neww.filter( items => items.type != currrr );
         this.setState({
                 applications: newww
         });
-        const currrr = "Rejected";
-        let newwww = await newww.filter( items => items.type != currrr );
+        let newwww = await newww.filter( items => items.jobid === this.state.thisjob );
         this.setState({
                 applications: newwww
-        });
-        let newwwww = await newwww.filter( items => items.jobid === this.state.thisjob );
-        this.setState({
-                applications: newwwww
         });
     }
     

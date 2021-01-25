@@ -67,7 +67,12 @@ class RecMyjob extends Component {
            });
            alldata.jobname = arrrr.title;
            alldata.typee = arrrr.type;
-            return alldata;
+           let arrrrr = await axios.post('http://localhost:5000/profileapp/getrating', { id: job.app})
+            .then(response => {
+                return response.data;
+           }); 
+           alldata.rating = arrrrr.rating;
+           return alldata;
          
         }));
         this.setState({
@@ -84,6 +89,7 @@ class RecMyjob extends Component {
         this.setState({
                 applications: newww
         });
+        
         
     }
     sortbyname = () => {

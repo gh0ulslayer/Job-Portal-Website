@@ -59,5 +59,13 @@ router.post('/rem',(req,res) => {
 //     .then(e => res.json(e))
 //     .catch(err => res.json(err));
 });
+router.post('/getrating',(req,res) => {
+
+
+    Profileapp.findOne({ rec: req.body.id }, function (err, user1) {
+        return res.json(user1);
+    });
+})
+
 
 module.exports  = router;

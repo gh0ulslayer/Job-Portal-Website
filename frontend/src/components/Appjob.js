@@ -31,7 +31,7 @@ class Appjob extends Component {
             search: '',
             minsalary: '',
             maxsalary: '',
-            durr: '7',
+            duration: 0,
             j_type: 'F'
 
         };
@@ -44,10 +44,10 @@ class Appjob extends Component {
         this.dsortbysalary = this.dsortbysalary.bind(this);
         this.onChangeminsalary = this.onChangeminsalary.bind(this);
         this.onChangemaxsalary = this.onChangemaxsalary.bind(this);
-        this.onChangedurr = this.onChangedurr.bind(this);
+        this.onChangeduration = this.onChangeduration.bind(this);
         this.onChangej_type = this.onChangej_type.bind(this);
         this.filterbysalary = this.filterbysalary.bind(this);
-        this.filterbydurr = this.filterbydurr.bind(this);
+        this.filterbyduration = this.filterbyduration.bind(this);
         this.filterbyj_type = this.filterbyj_type.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.subcount= this.subcount.bind(this);
@@ -65,8 +65,8 @@ class Appjob extends Component {
     onChangemaxsalary(event) {
         this.setState({ maxsalary: event.target.value });
     }
-    onChangedurr(event) {
-        this.setState({ durr: event.target.value });
+    onChangeduration(event) {
+        this.setState({ duration: event.target.value });
     }
     onChangej_type(event) {
         this.setState({ j_type: event.target.value });
@@ -196,16 +196,16 @@ class Appjob extends Component {
             maxsalary: ''
     });
     }
-    filterbydurr = () => {
+    filterbyduration = () => {
         let thiss  = this.state.jobs;
-        let neww =  thiss.filter( items => items.duration === this.state.durr )
+        let neww =  thiss.filter( items => items.duration === this.state.duration )
         this.setState({
             jobs: neww,
     });
     }
     filterbyj_type = () => {
         let thiss  = this.state.jobs;
-        let neww =  thiss.filter( items => items.type < this.state.j_type )
+        let neww =  thiss.filter( items => items.type === this.state.j_type )
         this.setState({
             jobs: neww,
     });
@@ -277,8 +277,21 @@ class Appjob extends Component {
                                onChange={this.onChangemaxsalary}
                                />  
                         <Button  onClick={this.filterbysalary} >Filter by salary</Button>
-                    
-                    
+                        <br></br>
+                        <label> Duration: </label>
+                        <input type="number" 
+                               value={this.state.duration}
+                               onChange={this.onChangeduration}
+                               />
+                        <Button  onClick={this.filterbyduration} >Filter by Duration</Button>
+                        <br></br>
+                        <label> Type: </label>
+                        <input type="text" 
+                               value={this.state.j_type}
+                               onChange={this.onChangej_type}
+                               />
+                        <Button  onClick={this.filterbyj_type} >Filter by Type</Button>
+
                         <table className="table table-striped">
                             <thead>
                                 <tr>
