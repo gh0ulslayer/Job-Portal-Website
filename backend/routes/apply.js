@@ -51,4 +51,20 @@ router.post('/state',(req,res) => {
     });
 
 });
-module.exports  = router;
+
+router.post('/rejectall',(req,res) => {
+
+    console.log(req.body.id);
+    Apply.find({ app: req.body.id }, function (err, user1) {
+        //user1.rem = curr
+        console.log(user1);
+        user1.forEach(lmao);
+        function lmao(item){
+            item.type = "Rejected";
+            item.save();
+        }
+        return res.json(user1);
+    });
+})
+
+module.exports  = router; 

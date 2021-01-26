@@ -65,8 +65,8 @@ export default class EditJob extends Component {
         axios.post('http://localhost:5000/apply', edit)
             .then(response => {
                 console.log(response.data.message);
-          //      this.props.history.push("/App-jobs");
-            //    window.location.reload();
+                this.props.history.push("/App-jobs");
+              window.location.reload();
             })
             .catch(err => {
                     alert(err);

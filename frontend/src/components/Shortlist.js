@@ -40,13 +40,26 @@ class RecMyjob extends Component {
         this.sortbydrating = this.sortbydrating.bind(this);
     }
 
-    changestate(idd,state,event){
+    changestate(idd,state,appid,event){
         event.preventDefault();
+        if(state === 'Shortlisted')
+        {
+        
+        axios.post('http://localhost:5000/apply/rejectall', {id:appid})
+        .then(res => {
+            console.log(res.data);
+
+        })
+        .catch(err => {
+                alert(err);
+        });
+        }
         const edit = {
             id: idd,
             state: state
         }
         console.log(edit);
+        console.log(1000000);
         axios.post('http://localhost:5000/apply/state', edit)
                     .then(res => {
                         console.log(res.data);
@@ -62,6 +75,7 @@ class RecMyjob extends Component {
 
         let arr = await axios.get('http://localhost:5000/apply')
              .then(response => {
+            //     console.log(response.data);
                 return response.data;
             })
              .catch(function(error) {
@@ -193,9 +207,9 @@ class RecMyjob extends Component {
                                             <td>{job.rating}</td>
                                             <td>{job.type}</td>
                                             <td>{job.date}</td>
-                                            <th> {job.type === "Applied" ?  <Button style = {{backgroundColor:'aqua'}} variant="contained" onClick={(event)=>{this.changestate(job._id,job.type,event)}}>Shortlist</Button> : (  job.type === "Shortlisted" ?  <Button style = {{backgroundColor:'yellow'}} variant="contained" onClick={(event)=>{this.changestate(job._id,job.type,event)}}>Accept</Button> : <Button style = {{backgroundColor:'green'}} variant="contained" onClick={()=>{}}>Badhai Ho</Button> )} </th>
+                                            <th> {job.type === "Applied" ?  <Button style = {{backgroundColor:'aqua'}} variant="contained" onClick={(event)=>{this.changestate(job._id,job.type,job.app,event)}}>Shortlist</Button> : (  job.type === "Shortlisted" ?  <Button style = {{backgroundColor:'yellow'}} variant="contained" onClick={(event)=>{this.changestate(job._id,job.type,job.app,event)}}>Accept</Button> : <Button style = {{backgroundColor:'green'}} variant="contained" onClick={(event)=>{this.changestate(job._id,job.type,job.app,event)}}>Badhai Ho</Button> )} </th>
                                             <th>
-                                    { job.type === "Accepted" ?   <Button  style = {{color:'red'}}  color="primary" disabled></Button> : <Button style = {{backgroundColor:'red'}} variant="contained" onClick={(event)=>{this.changestate(job._id,"Rejected",event)}}>Reject</Button> } </th>
+                                    { job.type === "Accepted" ?   <Button  style = {{color:'red'}}  color="primary" disabled></Button> : <Button style = {{backgroundColor:'red'}} variant="contained" onClick={(event)=>{this.changestate(job._id,"Rejected",job.app,event)}}>Reject</Button> } </th>
                                              
                                         </tr>
                                         
