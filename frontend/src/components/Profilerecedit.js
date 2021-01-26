@@ -44,7 +44,12 @@ export default class EditRec extends Component {
             bio: this.state.bio,
         }
         console.log(edit);
-        axios.post('http://localhost:5000/profilerec/edit', edit)
+        if(this.state.bio.split(' ').length > 250){
+            alert('OOPS , dont be a paraking');
+        }
+        else
+        {
+            axios.post('http://localhost:5000/profilerec/edit', edit)
             .then(response => {
                 console.log(response.data.message);
                 this.props.history.push("/Rec-profile");
@@ -53,6 +58,8 @@ export default class EditRec extends Component {
             .catch(err => {
                     alert(err);
             });
+        }
+        
     }
 
     render() {
