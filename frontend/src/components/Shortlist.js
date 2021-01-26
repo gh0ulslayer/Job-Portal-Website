@@ -198,7 +198,6 @@ class RecMyjob extends Component {
                                 this.state.applications.map((job, i) => {
                                     let varr = false;
                                     return (
-                                        
                                         <tr key={i}>
                                             <td>{job.recname}</td>
                                             <td>{job.review}</td>

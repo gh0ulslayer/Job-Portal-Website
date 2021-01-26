@@ -67,5 +67,25 @@ router.post('/getrating',(req,res) => {
     });
 })
 
+router.post('/editrating',(req,res) => {
 
+    var curr = parseInt(req.body.rating);
+    let varr  = parseInt(req.body.to_be);
+    Profileapp.findOne({ rec: req.body.id }, function (err, user1) {
+        var a = user1.rating 
+        var b = user1.no_rating
+        var c = a*b + curr;
+        var d = b + varr;
+        user1.rating = c/d;
+        user1.no_rating = d;
+        user1.save();
+        return res.json(user1);
+    });
+
+// // Profileapp.findOneAndUpdate({ rec: req.body.id } , { 
+//     //     rem: parseInt(curr) 
+//     //  })
+//     .then(e => res.json(e))
+//     .catch(err => res.json(err));
+});
 module.exports  = router;

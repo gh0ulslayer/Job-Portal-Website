@@ -24,10 +24,13 @@ const Job = new Schema({
         enum: [0,1,2,3,4,5,6],
         required: true
     },
-    rating: {
+    rating:{
         type: Number,
-        default: 0,
-        required: true
+        default: 0
+    },
+    no_rating:{
+        type: Number,
+        default: 0
     },
     rec: {
         type: String,

@@ -36,7 +36,7 @@ class RecMyjob extends Component {
         this.sortbyrating = this.sortbyrating.bind(this);
         this.sortbydrating = this.sortbydrating.bind(this);
     }
-
+    
     async componentWillMount(){
         let curr = localStorage.getItem('userid');
 
@@ -135,6 +135,7 @@ class RecMyjob extends Component {
             applications: thiss
     });
     }
+
             render() {
                 return (
                     <div>
@@ -181,7 +182,7 @@ class RecMyjob extends Component {
                                             <td>{job.doj}</td>
 
                                             <th>
-                                        <Link to={{ pathname: './rateapp', state: { 'id': job.app} }}>Rate</Link></th>    
+                                        <Link to={{ pathname: './rateapp', state: { 'id': job._id , 'rating': job.rating } }}>Rate</Link></th>    
 
                                         </tr>
                                         

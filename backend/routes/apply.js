@@ -30,6 +30,14 @@ router.post('/app',(req,res) => {
     });
 })
 
+
+router.post('/getapplication',(req,res) => {
+
+    Apply.find({ _id: req.body.id }, function (err, user1) {
+        return res.json(user1);
+    });
+})
+
 router.post('/state',(req,res) => {
 
     console.log(req.body.id , req.body.state);

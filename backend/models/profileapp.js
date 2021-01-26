@@ -31,6 +31,10 @@ const Profileapp = new Schema({
         type: Number,
         default: 0
     },
+    no_rating:{
+        type: Number,
+        default: 0
+    },
     date: {
         type: Date,
         default: Date.now,

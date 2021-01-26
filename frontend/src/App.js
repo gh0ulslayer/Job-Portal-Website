@@ -19,6 +19,7 @@ import AppProfile from './components/App-profile';
 import Appapplication from './components/App-application';
 import Addsop from './components/Appsop';
 import Shortlist from './components/Shortlist';
+import RateApp from './components/rateapp';
 
 import Register from './components/Register';
 import Login from './components/Login';
@@ -56,6 +57,7 @@ class App extends React.Component {
            <Route path="/App-application" component={Appapplication}/>
            <Route path="/sop" component={Addsop}/>
            <Route path="/shortlist" component={Shortlist}/>
+           <Route path="/rateapp" component={RateApp}/>
           
     
           </Router>
