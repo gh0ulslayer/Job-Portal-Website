@@ -11,12 +11,8 @@ const Profileapp = new Schema({
         type: String,
         required: true
     },
-    contact: {
-        type: String,
-        required: true
-    },
-    bio: {
-        type: String,
+    education: {
+        type: [],
         required: true
     },
     rec:{

@@ -58,8 +58,8 @@ class RecMyjob extends Component {
             id: idd,
             state: state
         }
-        console.log(edit);
-        console.log(1000000);
+      //  console.log(edit);
+     //   console.log(1000000);
         axios.post('http://localhost:5000/apply/state', edit)
                     .then(res => {
                         console.log(res.data);
@@ -97,7 +97,21 @@ class RecMyjob extends Component {
            let arrrr = await axios.post('http://localhost:5000/profileapp/getrating', { id: job.app})
             .then(response => {
                 return response.data;
-           }); 
+           });
+
+           var list = [];
+           alldata.education = [];
+           arrrr.education.map((value,idx) => {
+                var obj = {
+                    insti: value.insti,
+                    syear: value.syear,
+                    eyear: value.eyear,
+                }
+                list.push(obj);
+            })
+            alldata.education = list;
+          //  console.log(alldata.education);
+           //console.log(typeof arrrr.education);
            alldata.rating = arrrr.rating;
            return alldata;
          
@@ -120,6 +134,7 @@ class RecMyjob extends Component {
         this.setState({
                 applications: newwww
         });
+        console.log(this.state.applications.education);
     }
     
     sortbyname = () => {
@@ -185,7 +200,6 @@ class RecMyjob extends Component {
                                     <th>Name</th>
                                     <th>SOP</th>
                                     <th>Education</th>
-                                    <th>Skills</th>
                                     <th>Rating</th>
                                     <th>Stage</th>
                                     <th>Date of Application</th>
@@ -201,8 +215,13 @@ class RecMyjob extends Component {
                                         <tr key={i}>
                                             <td>{job.recname}</td>
                                             <td>{job.review}</td>
-                                            <td>{job.education}</td>
-                                            <td>{job.skills}</td>
+                                            <td> 
+                                            {job.education.map((valuee,idx) => {
+                                            return <div>
+                                                    {valuee.insti} ({valuee.syear}   -   {valuee.eyear})
+                                                 </div>
+                                            })}
+                                             </td>
                                             <td>{job.rating}</td>
                                             <td>{job.type}</td>
                                             <td>{job.date}</td>

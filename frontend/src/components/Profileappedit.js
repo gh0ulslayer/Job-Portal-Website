@@ -12,14 +12,18 @@ export default class EditApp extends Component {
             name: this.props.location.state.name,
             id: this.props.location.state.id,
             email: this.props.location.state.email,
-            bio: this.props.location.state.bio,
-            contact:this.props.location.state.contact
+            education: this.props.location.state.education,
+            insti: '',
+            syear: '',
+            eyear: '',
         }
         this.onChangename = this.onChangename.bind(this);
         this.onChangeemail = this.onChangeemail.bind(this);
-        this.onChangebio = this.onChangebio.bind(this);
-        this.onChangecontact = this.onChangecontact.bind(this);
+        this.onChangeinsti = this.onChangeinsti.bind(this);
+        this.onChangesyear = this.onChangesyear.bind(this);
+        this.onChangeeyear = this.onChangeeyear.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onSubmitEducation = this.onSubmitEducation.bind(this);
     }
     
     onChangename(event) {
@@ -28,11 +32,14 @@ export default class EditApp extends Component {
     onChangeemail(event) {
         this.setState({ email: event.target.value });
     }
-    onChangebio(event) {
-        this.setState({ bio: event.target.value });
+    onChangeinsti(event) {
+        this.setState({ insti: event.target.value });
     }
-    onChangecontact(event) {
-        this.setState({ contact: event.target.value });
+    onChangesyear(event) {
+        this.setState({ syear: event.target.value });
+    }
+    onChangeeyear(event) {
+        this.setState({ eyear: event.target.value });
     }
     onSubmit(e) {
         e.preventDefault();
@@ -40,8 +47,7 @@ export default class EditApp extends Component {
             id: this.state.id,
             name: this.state.name,
             email: this.state.email,
-            contact: this.state.contact,
-            bio: this.state.bio,
+            education: this.state.education,
         }
         console.log(edit);
         axios.post('http://localhost:5000/profileapp/edit', edit)
@@ -54,7 +60,29 @@ export default class EditApp extends Component {
                     alert(err);
             });
     }
+    onSubmitEducation(e){
+        e.preventDefault();
+        const edit = {
+            insti: this.state.insti,
+            syear: this.state.syear,
+            eyear: this.state.eyear
+        }
 
+        if(this.state.insti === '' || this.state.syear === '' || this.state.eyear === ''){
+            alert("Please provide all fields.")
+        }
+        else{
+            let neww = this.state.education;
+            neww.push(edit);
+            this.setState({
+            education: neww,
+            insti: '',
+            syear: '',
+            eyear: ''
+        });
+        }
+        
+    }
     render() {
         return (
             <div>
@@ -72,24 +100,37 @@ export default class EditApp extends Component {
                                value={this.state.email}
                                onChange={this.onChangeemail}
                                /> 
-                         <label>Contact: </label>
-                        <input type="string"
-                               className="form-control" 
-                               value={this.state.contact}
-                               onChange={this.onChangecontact}
-                               /> 
-                         <label>Bio: </label>
-                        <input type="string"
-                               className="form-control" 
-                               value={this.state.bio}
-                               onChange={this.onChangebio}
-                               /> 
                     </div>
+                    <div>
+                         <h3> Add Education </h3>
+                        <label>Institution: </label>
+                            <input type="text" 
+                               className="form-control" 
+                               value={this.state.insti}
+                               onChange={this.onChangeinsti}
+                            />  
+                            <label>Start Year: </label>
+                            <input type="text" 
+                            className="form-control" 
+                            value={this.state.syear}
+                            onChange={this.onChangesyear}
+                            />
+                            <label>End Year: </label>
+                            <input type="text" 
+                               className="form-control" 
+                               value={this.state.eyear}
+                               onChange={this.onChangeeyear}
+                            />
+                    </div>
+                    <div className="form-group">
+                                <input type="submit" value="ADD" className="btn btn-primary" onClick={this.onSubmitEducation}/>
+                            </div>
                     <div className="form-group">
                         <input type="submit" value="Update" className="btn btn-primary"/>
                     </div>
                 </form>
             </div>
+            
         )
     }
 }

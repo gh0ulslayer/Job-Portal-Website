@@ -27,8 +27,7 @@ router.post('/edit',(req,res) => {
     Profileapp.findOneAndUpdate({ _id: req.body.id } , { 
         name: req.body.name,
         email: req.body.email,
-        contact: req.body.contact,
-        bio: req.body.bio
+        education: req.body.education,
      })
     .then(e => res.json(e))
     .catch(err => res.json(err));

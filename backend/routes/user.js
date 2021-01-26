@@ -46,8 +46,7 @@ router.post('/',(req,res) => {
         const newProfileApp = new Profileapp;
         newProfileApp.name = newUser.name;
         newProfileApp.email = newUser.email;
-        newProfileApp.contact = "not set";
-        newProfileApp.bio = "not set";
+        newProfileApp.education = [];
         newProfileApp.rec = newUser._id;
         console.log(typeof newProfileApp.rec);
         console.log(newProfileApp);

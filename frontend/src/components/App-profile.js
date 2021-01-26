@@ -7,7 +7,7 @@ export default class ApplicantProfile extends Component {
     
     constructor(props) {
         super(props);
-        this.state = {profile: []};
+        this.state = {profile: [], education: []};
         
     }
 
@@ -45,8 +45,7 @@ export default class ApplicantProfile extends Component {
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Contact Number</th>
-                            <th>Bio</th>
+                            <th>Education</th>
                             <th></th>
                             
                         </tr>
@@ -59,11 +58,16 @@ export default class ApplicantProfile extends Component {
                                 <tr key={i}>
                                     <td>{Profileapp.name}</td>
                                     <td>{Profileapp.email} </td>
-                                    <td>{Profileapp.contact} </td>
-                                    <td>{Profileapp.bio} </td>
+                                    <td> 
+                                        {Profileapp.education.map((value,idx) => {
+                                            return <div>
+                                                    {value.insti} ({value.syear}   -   {value.eyear})
+                                                 </div>
+                                        })}
+                                    </td>
 
                                     <th>
-                                        <Link to={{ pathname: './appprofileedit', state: { 'id': Profileapp._id, 'name':Profileapp.name,'email':Profileapp.email,'contact':Profileapp.contact,'bio':Profileapp.bio} }}>Edit</Link></th>
+                                        <Link to={{ pathname: './appprofileedit', state: { 'id': Profileapp._id, 'name':Profileapp.name,'email':Profileapp.email,'education':Profileapp.education} }}>Edit</Link></th>
                                 </tr>
                             )
 
