@@ -115,7 +115,9 @@ class Appapplication extends Component {
                                             <td>{application.duration}</td>
                                             <td>{application.deadline}</td>
                                             <td>{application.type}</td>
-                                            
+                                            <th>
+                                        {application.type === 'Accepted' ? <Link to={{ pathname: './ratejob', state: { 'id': application._id , 'rating': application.rating } }}>Rate</Link> :  <Button  style = {{color:'red'}}  color="primary" disabled>can't rate</Button>}</th>    
+
                                         </tr>
                                     )
                                 })
