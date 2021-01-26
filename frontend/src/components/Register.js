@@ -49,7 +49,9 @@ export default class CreateUser extends Component {
             {
                 let noice = "Happy to have you on board, "+ newUser.name +"!";
                 alert(noice);
-                console.log(res.data)
+                this.props.history.push("/Login");
+                window.location.reload();
+              //  console.log(res.data)
             })
              .catch(err => {
                 if(err.response.data.name)
@@ -79,7 +81,7 @@ export default class CreateUser extends Component {
                     
                     <div className="form-group">
                         <label>Email: </label>
-                        <input type="text" 
+                        <input type="email" 
                                className="form-control" 
                                value={this.state.email}
                                onChange={this.onChangeemail}

@@ -153,14 +153,14 @@ class RecMyjob extends Component {
     }
     sortbytitle = () => {
         let thiss  = this.state.applications;
-        thiss.sort((a,b) => (a.title > b.title) ? 1 : -1);
+        thiss.sort((a,b) => (a.date > b.date) ? 1 : -1);
         this.setState({
             applications: thiss
     });
     }
     sortbydtitle = () => {
         let thiss  = this.state.applications;
-        thiss.sort((a,b) => (a.title < b.title) ? 1 : -1);
+        thiss.sort((a,b) => (a.date < b.date) ? 1 : -1);
         this.setState({
             applications: thiss
     });
@@ -187,8 +187,8 @@ class RecMyjob extends Component {
                         <Button style = {{backgroundColor:'purple'}} variant="contained"  onClick={this.sortbydname} >Sort By Name(D)</Button>
                         </form>
                         <form>
-                        <Button style = {{backgroundColor:'lime'}} variant="contained"  onClick={this.sortbytitle} >Sort By Title</Button>
-                        <Button style = {{backgroundColor:'lime'}} variant="contained"  onClick={this.sortbydtitle} >Sort By Title(D)</Button>
+                        <Button style = {{backgroundColor:'lime'}} variant="contained"  onClick={this.sortbytitle} >DO Application</Button>
+                        <Button style = {{backgroundColor:'lime'}} variant="contained"  onClick={this.sortbydtitle} >DO Application(D)</Button>
                         </form>
                         <form>
                         <Button style = {{backgroundColor:'orange'}} variant="contained"  onClick={this.sortbyrating} >Sort By Rating</Button>

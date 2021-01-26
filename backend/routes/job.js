@@ -11,6 +11,11 @@ router.get('/',(req,res) => {
     .then(job => res.json(job));
 })
 
+router.get('/all',(req,res) => {
+    Job.find()
+    .then(job => res.json(job));
+})
+
 
 // @route Post request for Adding Job
 router.post('/',(req,res) => {

@@ -276,13 +276,22 @@ class Appjob extends Component {
                         <input type="submit" value="Search" className="btn btn-primary" size="2"/>
                         </div>
                          </form>
-                        <Button  onClick={this.sortbysalary} >Sort By Salary</Button>
-                        <Button  onClick={this.dsortbysalary} >Sort By Salary(Descending)</Button>
-                        <Button  onClick={this.sortbyduration} >Sort By Duration</Button>
-                        <Button  onClick={this.dsortbyduration} >Sort By Duration(Descending)</Button>
-                        <Button  onClick={this.sortbyrating} >Sort By Rating</Button>
-                        <Button  onClick={this.dsortbyrating} >Sort By Rating(Descending)</Button>
+                         <div>
+                        <Button style = {{backgroundColor:'green'}} variant="contained" onClick={this.sortbysalary} >Sort By Salary</Button>
+                        <Button style = {{backgroundColor:'green'}} variant="contained" onClick={this.dsortbysalary} >Sort By Salary(Descending)</Button>
+                        </div>
                         <br></br>
+                        <div>
+                        <Button style = {{backgroundColor:'lime'}} variant="contained" onClick={this.sortbyduration} >Sort By Duration</Button>
+                        <Button style = {{backgroundColor:'lime'}} variant="contained" onClick={this.dsortbyduration} >Sort By Duration(Descending)</Button>
+                        </div>
+                        <br></br>
+                        <div>
+                        <Button style = {{backgroundColor:'yellow'}} variant="contained" onClick={this.sortbyrating} >Sort By Rating</Button>
+                        <Button style = {{backgroundColor:'yellow'}} variant="contained" onClick={this.dsortbyrating} >Sort By Rating(Descending)</Button>
+                        </div>
+                        <br></br>
+                        <div>
                         <label>Min Salary: </label>
                         <input type="number" 
                                value={this.state.minsalary}
@@ -294,7 +303,10 @@ class Appjob extends Component {
                                value={this.state.maxsalary}
                                onChange={this.onChangemaxsalary}
                                />  
-                        <Button  onClick={this.filterbysalary} >Filter by salary</Button>
+                        <div>
+                        <Button style = {{backgroundColor:'orange'}} variant="contained" onClick={this.filterbysalary} >Filter by salary</Button>
+                        </div>
+                        </div>
                         <div className="form-group">
                         <label>Duration: </label>
                         <select className="form-control"  value={this.state.duration} onChange={this.onChangeduration}> 
@@ -306,7 +318,7 @@ class Appjob extends Component {
                             <option name="5" value="5">5</option>
                             <option name="6" value="6">6</option>
                         </select>
-                        <Button  onClick={this.filterbyduration} >Filter by Duration</Button>
+                        <Button style = {{backgroundColor:'orange'}} variant="contained" onClick={this.filterbyduration} >Filter by Duration</Button>
                     </div>
                         <div className="form-group">
                         <label>Type: </label>
@@ -315,7 +327,7 @@ class Appjob extends Component {
                             <option name="P" value="P">Part Time</option>
                             <option name="W" value="W">Work From Home</option>
                         </select>
-                        <Button  onClick={this.filterbyj_type} >Filter by Type</Button>
+                        <Button style = {{backgroundColor:'orange'}} variant="contained" onClick={this.filterbyj_type} >Filter by Type</Button>
                     </div>
                         <table className="table table-striped">
                             <thead>

@@ -31,6 +31,8 @@ class RecMyjob extends Component {
         };
         this.sortbyname = this.sortbyname.bind(this);
         this.sortbydname = this.sortbydname.bind(this);
+        this.sortbydoj = this.sortbydoj.bind(this);
+        this.sortbyddoj = this.sortbyddoj.bind(this);
         this.sortbytitle = this.sortbytitle.bind(this);
         this.sortbydtitle= this.sortbydtitle.bind(this);
         this.sortbyrating = this.sortbyrating.bind(this);
@@ -135,7 +137,20 @@ class RecMyjob extends Component {
             applications: thiss
     });
     }
-
+    sortbydoj = () => {
+        let thiss  = this.state.applications;
+        thiss.sort((a,b) => (a.doj > b.doj) ? 1 : -1);
+        this.setState({
+            applications: thiss
+    });
+    }
+    sortbyddoj = () => {
+        let thiss  = this.state.applications;
+        thiss.sort((a,b) => (a.doj < b.doj) ? 1 : -1);
+        this.setState({
+            applications: thiss
+    });
+    }
             render() {
                 return (
                     <div>
@@ -152,8 +167,8 @@ class RecMyjob extends Component {
                         <Button style = {{backgroundColor:'orange'}} variant="contained"  onClick={this.sortbydrating} >Sort By Rating(D)</Button>
                         </form>
                         <form>
-                        <Button style = {{backgroundColor:'yellow'}} variant="contained"  onClick={this.sortbyname} >Sort By Name</Button>
-                        <Button style = {{backgroundColor:'yellow'}} variant="contained"  onClick={this.sortbyname} >Sort By Name</Button>
+                        <Button style = {{backgroundColor:'yellow'}} variant="contained"  onClick={this.sortbydoj} >Sort By DOJ</Button>
+                        <Button style = {{backgroundColor:'yellow'}} variant="contained"  onClick={this.sortbyddoj} >Sort By DOJ(D)</Button>
                         </form>
                        
                         <table className="table table-striped">

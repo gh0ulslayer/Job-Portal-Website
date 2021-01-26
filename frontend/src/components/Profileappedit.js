@@ -68,7 +68,7 @@ export default class EditApp extends Component {
             eyear: this.state.eyear
         }
 
-        if(this.state.insti === '' || this.state.syear === '' || this.state.eyear === ''){
+        if(this.state.insti === '' || this.state.syear === '' ){
             alert("Please provide all fields.")
         }
         else{

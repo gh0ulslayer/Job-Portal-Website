@@ -34,7 +34,14 @@ class RecMyjob extends Component {
     async componentWillMount(){
         let curr = localStorage.getItem('userid');
 
-        let arr = await axios.get('http://localhost:5000/job')
+        let arr = await axios.get('http://localhost:5000/job/all')
+             .then(response => {
+                return response.data;
+            })
+             .catch(function(error) {
+                 console.log(error);
+             });
+        let arrr = await axios.post('http://localhost:5000/apply/rec',{id:curr})
              .then(response => {
                 return response.data;
             })
@@ -43,7 +50,6 @@ class RecMyjob extends Component {
              });
 
         let neww = await arr.filter( items => items.rec === curr );
-        console.log(neww);
         this.setState({
                 jobs: neww
         });
@@ -58,7 +64,7 @@ class RecMyjob extends Component {
                                 <tr>
                                     <th>Job</th>
                                     <th>Positions remaining</th>
-                                    <th>Total job requests</th>
+                                    <th>No of Applicants</th>
                                     <th>Date of Posting</th>
 
                                     <th></th>
@@ -77,7 +83,7 @@ class RecMyjob extends Component {
                                             <th>
                                         <Link to={{ pathname: './jobedit', state: { 'id': job._id, 'maxpos':job.maxpos, 'maxapp':job.maxapp, 'deadline':job.deadline} }}>Edit</Link></th>    
                                        <th>
-                                        <Link to={{ pathname: './recprofileedit', state: { 'id': job._id, 'name':job.title} }}>Delete</Link></th>    
+                                        <Link to={{ pathname: './delete', state: { 'id': job._id, 'name':job.title} }}>Delete</Link></th>    
                                            
                                         </tr>
                                         

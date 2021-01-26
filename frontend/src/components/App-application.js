@@ -98,7 +98,7 @@ class Appapplication extends Component {
                                     <th>Job Rating</th>
                                     <th>Salary per month</th>
                                     <th>Job Duration</th>
-                                    <th>Deadline</th>
+                                    <th>Date of Joining</th>
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
@@ -113,7 +113,7 @@ class Appapplication extends Component {
                                             <td>{application.rating}</td>
                                             <td>{application.salary}</td>
                                             <td>{application.duration}</td>
-                                            <td>{application.deadline}</td>
+                                            <td>{application.doj}</td>
                                             <td>{application.type}</td>
                                             <th>
                                         {application.type === 'Accepted' ? <Link to={{ pathname: './ratejob', state: { 'id': application._id , 'rating': application.rating } }}>Rate</Link> :  <Button  style = {{color:'red'}}  color="primary" disabled>can't rate</Button>}</th>    

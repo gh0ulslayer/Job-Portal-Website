@@ -30,6 +30,13 @@ router.post('/app',(req,res) => {
     });
 })
 
+router.post('/rec',(req,res) => {
+    console.log(req.body);
+    Apply.find({ jobid: req.body.id , rec: req.body.rec }, function (err, user1) {
+        console.log(user1);
+        return res.json(user1);
+    });
+})
 
 router.post('/getapplication',(req,res) => {
 
