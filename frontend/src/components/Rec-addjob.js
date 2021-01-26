@@ -110,7 +110,7 @@ export default class CreateUser extends Component {
                     
                     <div className="form-group">
                         <label>Salary: </label>
-                        <input type="text" 
+                        <input type="integer" 
                                className="form-control" 
                                value={this.state.salary}
                                onChange={this.onChangesalary}

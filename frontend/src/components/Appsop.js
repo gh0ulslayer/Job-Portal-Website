@@ -38,7 +38,11 @@ export default class EditJob extends Component {
             idx:0
         }
         var idd = this.state.jobid;
-        axios.post('http://localhost:5000/job/getapp',{id:this.state.jobid})
+        if(this.state.review.split(' ').length > 250){
+            alert('OOPS , dont be a paraking');
+        }
+        else{
+            axios.post('http://localhost:5000/job/getapp',{id:this.state.jobid})
         .then(response => {
           console.log(response.data);
            curr = response.data.maxapp;
@@ -71,6 +75,8 @@ export default class EditJob extends Component {
             .catch(err => {
                     alert(err);
             });
+        }
+        
     }
 
     render() {

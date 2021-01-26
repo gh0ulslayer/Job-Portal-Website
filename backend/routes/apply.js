@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
-
+const nodemailer = require('nodemailer');
+const sendgridTransport = require('nodemailer-sendgrid-transport')
 // Apply model
 const Apply = require('../models/apply');
+const Job = require('../models/job');
+const User = require('../models/user');
 
 // @route Get request
 router.get('/',(req,res) => {
@@ -45,6 +48,14 @@ router.post('/getapplication',(req,res) => {
     });
 })
 
+let mailTransporter = nodemailer.createTransport({ 
+    service: 'gmail', 
+    auth: { 
+        user: 'random@gmail.com', 
+        pass: 'random'
+    } 
+});
+
 router.post('/state',(req,res) => {
 
     console.log(req.body.id , req.body.state);
@@ -56,6 +67,24 @@ router.post('/state',(req,res) => {
         else if(req.body.state === "Shortlisted")
         {
             user1.type = "Accepted"
+            let emmail = null
+            User.findOne({_id: user1.app} , function(err,user2) {
+                console.log(user2.email)
+                emmail = user2.email
+            })
+            let mailDetails = { 
+                from:'random@gmail.com', 
+                to: emmail,
+                subject: 'Application Accepted', 
+                html: 'GG boi , you made it !!!'
+            };
+            mailTransporter.sendMail(mailDetails, function(err, data) { 
+                if(err) { 
+                    console.log('Error Occurs'); 
+                } else { 
+                    console.log('Email sent successfully'); 
+                }}
+            )
         }
         else if(req.body.state === "Rejected")
         {
