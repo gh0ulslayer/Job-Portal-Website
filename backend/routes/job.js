@@ -7,7 +7,7 @@ const Job = require('../models/job');
 
 // @route Get request
 router.get('/',(req,res) => {
-    Job.find()
+    Job.find({deadline: {$gt : Date.now()}})
     .then(job => res.json(job));
 })
 
