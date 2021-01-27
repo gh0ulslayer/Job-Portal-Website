@@ -38,7 +38,7 @@ class RecruiterNavbar extends Component {
                         <NavLink href = "/Rec-myjob">My Jobs</NavLink>
                         </NavItem>
                         <NavItem>
-                        <NavLink href = "/Rec-jobreq">Job Requests</NavLink>
+                        <NavLink href = "/Rec-jobreq">Accepted Applicants</NavLink>
                         </NavItem>
                         <NavItem>
                         <NavLink href = "/Rec-profile" >My Profile</NavLink>
